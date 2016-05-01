@@ -5,6 +5,7 @@
 #include "../Tmx/Tmx.h"
 #include "../Graphics/Lowlevel/Texture.h"
 #include "../Graphics/Lowlevel/IndexedVertexArray.h"
+#include "../Graphics/Lowlevel/DynamicLevelVao.h"
 
 using namespace std;
 using namespace Tmx;
@@ -25,7 +26,7 @@ private:
 	const TileLayer* layer;
 	const Tileset* tileSet;
 
-	IndexedVertexArray* mesh;
+	DynamicLevelVao* mesh;
 
 	Texture* texAtlas;
 

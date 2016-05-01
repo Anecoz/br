@@ -48,7 +48,7 @@ int main() {
 	}
 
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
+	glfwSwapInterval(0);
 
 	glfwSetKeyCallback(window, KeyInput::invoke);
 	glfwSetCursorPosCallback(window, MousePosInput::invoke);
@@ -80,7 +80,7 @@ int main() {
 	FontRenderer::init(1280, 720);
 
 	// TESTING
-	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0.5, 64);
+	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0.5, 40);
 
 	using namespace chrono;
 	long lastTime = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
