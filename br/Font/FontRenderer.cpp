@@ -30,7 +30,7 @@ void FontRenderer::init(int screenWidth, int screenHeight) {
 		cerr << "could not init freetype" << endl;
 	}
 
-	if (FT_New_Face(ft, "Roboto-Regular.ttf", 0, &face)) {
+	if (FT_New_Face(ft, "Resource/fonts/Roboto-Regular.ttf", 0, &face)) {
 		cerr << "Could not open font." << endl;
 	}
 	setPixelSize(48);

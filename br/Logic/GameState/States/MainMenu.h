@@ -1,6 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "../State.h"
+#include "../../../Graphics/GUI/Button.h"
+#include "../../../Font/Text.h"
 
 class StateMachine;
 
@@ -14,6 +18,7 @@ public:
 	void render();
 
 private:
-
+	vector<Button*> buttons;
+	vector<Text*> texts;
+	void cleanUp();
 };
-
