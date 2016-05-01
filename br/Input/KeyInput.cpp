@@ -1,7 +1,7 @@
 #include "KeyInput.h"
 
 bool KeyInput::keys[256];
-vector<int>* KeyInput::pressed;
+vector<int>* KeyInput::pressed = new vector<int>;
 
 KeyInput::~KeyInput() {
 	delete pressed;
