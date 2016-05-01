@@ -42,7 +42,8 @@ GLuint ShaderUtils::loadShaders(const char *vertex_path, const char *fragment_pa
 	glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &logLength);
 	std::vector<GLchar> vertShaderError((logLength > 1) ? logLength : 1);
 	glGetShaderInfoLog(vertShader, logLength, NULL, &vertShaderError[0]);
-	std::cout << &vertShaderError[0] << std::endl;
+	if (strlen(&vertShaderError[0]) != 0)
+		std::cout << &vertShaderError[0] << std::endl;
 
 	// Compile fragment shader
 	glShaderSource(fragShader, 1, &fragShaderSrc, NULL);
@@ -53,7 +54,8 @@ GLuint ShaderUtils::loadShaders(const char *vertex_path, const char *fragment_pa
 	glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &logLength);
 	std::vector<GLchar> fragShaderError((logLength > 1) ? logLength : 1);
 	glGetShaderInfoLog(fragShader, logLength, NULL, &fragShaderError[0]);
-	std::cout << &fragShaderError[0] << std::endl;
+	if (strlen(&fragShaderError[0]) != 0)
+		std::cout << &fragShaderError[0] << std::endl;
 
 	GLuint program = glCreateProgram();
 	glAttachShader(program, vertShader);
@@ -64,7 +66,8 @@ GLuint ShaderUtils::loadShaders(const char *vertex_path, const char *fragment_pa
 	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
 	std::vector<char> programError((logLength > 1) ? logLength : 1);
 	glGetProgramInfoLog(program, logLength, NULL, &programError[0]);
-	std::cout << &programError[0] << std::endl;
+	if (strlen(&programError[0]) != 0)
+		std::cout << &programError[0] << std::endl;
 
 	glDeleteShader(vertShader);
 	glDeleteShader(fragShader);
