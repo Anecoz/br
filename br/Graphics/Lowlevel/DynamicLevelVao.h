@@ -12,7 +12,7 @@ public:
 	DynamicLevelVao(GLfloat* vertices, GLuint* indices, GLint numVerts, GLint indicesCount, GLint floatPerVertex);
 	~DynamicLevelVao();
 
-	void modifyTexBuffers(vector<GLfloat>& texCoords1, vector<GLfloat>& texCoords2, int num);
+	void modifyTexBuffers(GLfloat* texCoords1, GLfloat* texCoords2, int num);
 
 	void drawInstances(int num);
 

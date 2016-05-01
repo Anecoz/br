@@ -20,13 +20,13 @@ void DynamicLevelVao::drawInstances(int num) {
 	IndexedVertexArray::unbind();
 }
 
-void DynamicLevelVao::modifyTexBuffers(vector<GLfloat>& texCoords1, vector<GLfloat>& texCoords2, int num) {
+void DynamicLevelVao::modifyTexBuffers(GLfloat* texCoords1, GLfloat* texCoords2, int num) {
 	IndexedVertexArray::bind();	
 
 	glBindBuffer(GL_ARRAY_BUFFER, texVbo1);
-	glBufferData(GL_ARRAY_BUFFER, num * sizeof GLfloat, &texCoords1[0], GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, num * sizeof GLfloat, texCoords1, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, texVbo2);
-	glBufferData(GL_ARRAY_BUFFER, num * sizeof GLfloat, &texCoords2[0], GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, num * sizeof GLfloat, texCoords2, GL_DYNAMIC_DRAW);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	IndexedVertexArray::unbind();

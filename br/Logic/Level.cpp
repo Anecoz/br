@@ -5,6 +5,7 @@
 #include "../Graphics/Camera.h"
 #include <glm/gtx/transform.hpp>
 #include <vector>
+#include <math.h>
 
 #include <iostream>
 
@@ -70,45 +71,30 @@ void Level::render(mat4& projMatrix) {
 	glActiveTexture(GL_TEXTURE0);
 	texAtlas->bind();
 
-	vec4 texCoordVec1;
-	vec4 texCoordVec2;
-	mat4 translationMatrix;
-	vector<GLfloat> tex1, tex2;
-	int counter = 0;
+	//vector<GLfloat> tex1, tex2;
+	int size = ceil(Camera::getWinSizeX()) * ceil(Camera::getWinSizeY()) * 4;
+	GLfloat* tex1 = new GLfloat[size];
+	GLfloat* tex2 = new GLfloat[size];
+	int numTiles = 0;
+	int incrementer = 0;
 	// Loop and get correct tiles to draw
 	for (int y = (int)Camera::getPosition().y; y < Camera::getPosition().y + Camera::getWinSizeY(); y++) {
 		for (int x = (int)Camera::getPosition().x; x < Camera::getPosition().x + Camera::getWinSizeX(); x++) {
 			GLfloat* texCoords = layer->GetTile(x, y).texCoords;
 
 			// Fill the VBOs
-			tex1.push_back(texCoords[0]);
-			tex1.push_back(texCoords[1]);
-			tex1.push_back(texCoords[2]);
-			tex1.push_back(texCoords[3]);
-			tex2.push_back(texCoords[4]);
-			tex2.push_back(texCoords[5]);
-			tex2.push_back(texCoords[6]);
-			tex2.push_back(texCoords[7]);
+			tex1[incrementer] = texCoords[0]; tex2[incrementer] = texCoords[4]; incrementer++;
+			tex1[incrementer] = texCoords[1]; tex2[incrementer] = texCoords[5]; incrementer++;
+			tex1[incrementer] = texCoords[2]; tex2[incrementer] = texCoords[6]; incrementer++;
+			tex1[incrementer] = texCoords[3]; tex2[incrementer] = texCoords[7]; incrementer++;
 
-			counter++;
-
-			/*texCoordVec1.x = texCoords[0];
-			texCoordVec1.y = texCoords[1];
-			texCoordVec1.z = texCoords[2];
-			texCoordVec1.w = texCoords[3];
-			texCoordVec2.x = texCoords[4];
-			texCoordVec2.y = texCoords[5];
-			texCoordVec2.z = texCoords[6];
-			texCoordVec2.w = texCoords[7];
-			ShaderHandler::levelShader->uploadVec(texCoordVec1, "texCoords1");
-			ShaderHandler::levelShader->uploadVec(texCoordVec2, "texCoords2");
-
-			translationMatrix = glm::translate(mat4(1.0f), vec3(x, y, 0));
-			ShaderHandler::levelShader->uploadMatrix(translationMatrix, "translationMatrix");*/			
+			numTiles++;
 		}	
 	}
-	mesh->modifyTexBuffers(tex1, tex2, tex1.size());
-	mesh->drawInstances(counter);
+	mesh->modifyTexBuffers(tex1, tex2, size);
+	mesh->drawInstances(numTiles);
+	delete[] tex1;
+	delete[] tex2;
 
 	texAtlas->unbind();
 	ShaderHandler::levelShader->pissOff();
