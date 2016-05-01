@@ -27,7 +27,7 @@ public:
 	}
 
 private:
-	static bool keys[256];
+	static bool keys[512];
 	static vector<int>* pressed;
 };
 

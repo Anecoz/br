@@ -107,7 +107,6 @@ int main() {
 			updates++;
 			delta--;
 
-
 			if (KeyInput::isKeyClicked(GLFW_KEY_ESCAPE))
 				glfwSetWindowShouldClose(window, GL_TRUE);
 		}

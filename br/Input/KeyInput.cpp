@@ -1,6 +1,6 @@
 #include "KeyInput.h"
 
-bool KeyInput::keys[256];
+bool KeyInput::keys[512];
 vector<int>* KeyInput::pressed = new vector<int>;
 
 KeyInput::~KeyInput() {
