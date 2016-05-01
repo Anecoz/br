@@ -3,7 +3,12 @@
 #include "MathUtils.h"
 #include "../Graphics/Camera.h"
 
-glm::vec2 MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int& screenWidth, int& screenHeight, glm::mat4& viewProj) {
+void MathUtils::GUItoOpenGLCoord(glm::vec2& guiPoint) {
+	guiPoint.x = guiPoint.x * 2.0 - 1.0;
+	guiPoint.y = -guiPoint.y * 2.0 + 1.0;
+}
+
+void MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int& screenWidth, int& screenHeight, glm::mat4& viewProj) {
 	double x = 2.0 * (double)screenPoint.x / (double)screenWidth - 1.0;
 	double y = -2.0 * (double)screenPoint.y / (double)screenHeight + 1.0;
 	glm::mat4 invProj = glm::inverse(viewProj);
@@ -12,7 +17,8 @@ glm::vec2 MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int& screenWidth
 	screenPoint.y = (float)y;
 	glm::vec4 temp(screenPoint.x, screenPoint.y, 0.0f, 1.0f);
 	temp = invProj * temp;
-	return glm::vec2(temp.x, temp.y);
+	screenPoint.x = temp.x;
+	screenPoint.y = temp.y;
 }
 glm::vec2 MathUtils::screenSpaceToGUI(glm::vec2& screenPoint) {
 	float x = screenPoint.x / (float)1280;  // TODO: GET SCREEN SIZE FROM OPTIONS FILE

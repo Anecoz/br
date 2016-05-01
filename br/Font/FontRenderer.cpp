@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <glm\glm.hpp>
 #include "..\Graphics\Shaders\ShaderHandler.h"
+#include "../Utils/MathUtils.h"
 
 using namespace std;
 
@@ -81,6 +82,10 @@ void FontRenderer::render() {
 		const char* text = textEntry->text.c_str();
 		float x = textEntry->x;
 		float y = textEntry->y;
+		vec2 pos{ x, y };
+		MathUtils::GUItoOpenGLCoord(pos);
+		x = pos.x;
+		y = pos.y;
 		setPixelSize(textEntry->size);
 		for (p = text; *p; p++) {
 			if (FT_Load_Char(face, *p, FT_LOAD_RENDER))

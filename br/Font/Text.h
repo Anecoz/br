@@ -7,6 +7,7 @@ using std::string;
 class Text
 {
 public:
+	// Take x and y in GUI coordinate system
 	Text(string text, float x, float y, int size);
 	~Text();
 

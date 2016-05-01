@@ -80,7 +80,7 @@ int main() {
 	FontRenderer::init(1280, 720);
 
 	// TESTING
-	Text* text = new Text("Welcome to Kapperino Kapperoni", -0.4, 0, 64);
+	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0.5, 64);
 
 	using namespace chrono;
 	long lastTime = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
