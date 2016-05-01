@@ -25,7 +25,7 @@ glm::vec2 MathUtils::screenSpaceToGUI(glm::vec2& screenPoint) {
 	float y = screenPoint.y / (float)720;
 	return glm::vec2(x, y);
 }
-bool MathUtils::isWithingGUIBox(glm::vec2& guiPoint, float& x, float& y, float& width, float& height) {
+bool MathUtils::isWithinGUIBox(glm::vec2& guiPoint, float x, float y, float width, float height) {
 	bool out = false;
 	if (guiPoint.x >= x && guiPoint.x <= x + width) {
 		if (guiPoint.y >= y && guiPoint.y <= y + height)

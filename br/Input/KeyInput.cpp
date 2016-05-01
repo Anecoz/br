@@ -13,7 +13,4 @@ void KeyInput::invoke(GLFWwindow* window, int key, int scancode, int action, int
 	if (action == GLFW_RELEASE && find(pressed->begin(), pressed->end(), key) != pressed->end()) {
 		pressed->erase(remove(pressed->begin(), pressed->end(), key), pressed->end());
 	}
-
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
 }

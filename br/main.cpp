@@ -17,6 +17,7 @@
 
 #include "Font\FontRenderer.h"
 #include "Font\Text.h"
+#include "Graphics\GUI\Button.h"
 
 #include "Graphics\Shaders\ShaderHandler.h"
 
@@ -80,7 +81,9 @@ int main() {
 	FontRenderer::init(1280, 720);
 
 	// TESTING
-	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0.5, 64);
+	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0, 64);
+	Button* button = new Button("BUTTON", 30, glm::vec2(0.5f));
+	button->setCallback([] {cout << "CALBBACK TRIGGERD" << endl; });
 
 	using namespace chrono;
 	long lastTime = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
@@ -97,11 +100,16 @@ int main() {
 		delta += (now - lastTime) / ns;
 		lastTime = now;
 		
+		// Logic Update
 		if (delta >= 1.0) {
 			glfwPollEvents();			
-
+			button->update();
 			updates++;
 			delta--;
+
+
+			if (KeyInput::isKeyClicked(GLFW_KEY_ESCAPE))
+				glfwSetWindowShouldClose(window, GL_TRUE);
 		}
 
 		// Render
@@ -122,6 +130,8 @@ int main() {
 
 	delete level;
 	level = nullptr;
+	delete button;
+	button = nullptr;
 	delete text;
 	text = nullptr;
 	ShaderHandler::cleanUp();

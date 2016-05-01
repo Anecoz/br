@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Menu\MainMenu.h"
+#include "States\MainMenu.h"
 #include "StateMachine.h"
 
 class Application {
