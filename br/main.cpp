@@ -49,7 +49,7 @@ int main() {
 	}
 
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
+	glfwSwapInterval(0);
 
 	glfwSetKeyCallback(window, KeyInput::invoke);
 	glfwSetCursorPosCallback(window, MousePosInput::invoke);

@@ -4,8 +4,11 @@
 #include "../Graphics/Shaders/ShaderHandler.h"
 #include "../Graphics/Camera.h"
 #include <glm/gtx/transform.hpp>
+#include <vector>
 
 #include <iostream>
+
+using std::vector;
 
 Level::Level(const string& fileName) {
 	map = new Map();
@@ -23,7 +26,7 @@ Level::Level(const string& fileName) {
 	
 	texAtlas = new Texture(tileSet->GetImage()->GetSource(), 1.0f);
 
-	mesh = GraphicsUtils::createSimpleQuad();
+	mesh = GraphicsUtils::createLevelQuad();
 }
 
 Level::~Level() {
@@ -70,11 +73,26 @@ void Level::render(mat4& projMatrix) {
 	vec4 texCoordVec1;
 	vec4 texCoordVec2;
 	mat4 translationMatrix;
+	vector<GLfloat> tex1, tex2;
+	int counter = 0;
 	// Loop and get correct tiles to draw
-	for (int x = (int)Camera::getPosition().x; x < Camera::getPosition().x + Camera::getWinSizeX(); x++) {
-		for (int y = (int)Camera::getPosition().y; y < Camera::getPosition().y + Camera::getWinSizeY(); y++) {
+	for (int y = (int)Camera::getPosition().y; y < Camera::getPosition().y + Camera::getWinSizeY(); y++) {
+		for (int x = (int)Camera::getPosition().x; x < Camera::getPosition().x + Camera::getWinSizeX(); x++) {
 			GLfloat* texCoords = layer->GetTile(x, y).texCoords;
-			texCoordVec1.x = texCoords[0];
+
+			// Fill the VBOs
+			tex1.push_back(texCoords[0]);
+			tex1.push_back(texCoords[1]);
+			tex1.push_back(texCoords[2]);
+			tex1.push_back(texCoords[3]);
+			tex2.push_back(texCoords[4]);
+			tex2.push_back(texCoords[5]);
+			tex2.push_back(texCoords[6]);
+			tex2.push_back(texCoords[7]);
+
+			counter++;
+
+			/*texCoordVec1.x = texCoords[0];
 			texCoordVec1.y = texCoords[1];
 			texCoordVec1.z = texCoords[2];
 			texCoordVec1.w = texCoords[3];
@@ -86,11 +104,11 @@ void Level::render(mat4& projMatrix) {
 			ShaderHandler::levelShader->uploadVec(texCoordVec2, "texCoords2");
 
 			translationMatrix = glm::translate(mat4(1.0f), vec3(x, y, 0));
-			ShaderHandler::levelShader->uploadMatrix(translationMatrix, "translationMatrix");
-
-			mesh->draw();
-		}
+			ShaderHandler::levelShader->uploadMatrix(translationMatrix, "translationMatrix");*/			
+		}	
 	}
+	mesh->modifyTexBuffers(tex1, tex2, tex1.size());
+	mesh->drawInstances(counter);
 
 	texAtlas->unbind();
 	ShaderHandler::levelShader->pissOff();
