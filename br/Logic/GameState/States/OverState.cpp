@@ -3,13 +3,13 @@
 
 #include <iostream>
 
-OverState::OverState(StateMachine& machine, bool replace)
-	: State{ machine, replace } {
-	std::cout << "Over State Init.." << std::endl;
-
+OverState::OverState(StateMachine& machine, GLFWwindow& window, bool replace)
+	: State{ machine, window, replace } {
 	Text* Titel = new Text("GAME OVER", 0.4f, 0.1f, 40);
 	
-	texts.push_back(Titel);
+	m_texts.push_back(Titel);
+
+	std::cout << "Over State Init" << std::endl;
 }
 
 void OverState::pause() {
@@ -22,7 +22,7 @@ void OverState::resume() {
 
 void OverState::update() {
 
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->update();
 	}
 }
@@ -32,10 +32,10 @@ void OverState::render() {
 }
 
 void OverState::cleanUp() {
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->remove();
 	}
-	for (Text* t : texts) {
+	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}

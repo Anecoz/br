@@ -1,12 +1,14 @@
 #pragma once
 
 #include <memory>
+#include <GL\glew.h>
+#include <GLFW\glfw3.h>
 
 class StateMachine;
 
 class State {
 public:
-	State(StateMachine& machine, bool replace = true);
+	State(StateMachine& machine, GLFWwindow& window, bool replace = true);
 	virtual ~State() = default;
 
 	State(const State&) = delete;
@@ -23,6 +25,7 @@ public:
 
 protected:
 	StateMachine& m_machine;
+	GLFWwindow& m_window;
 	bool m_replacing;
 	std::unique_ptr<State> m_next;
 };

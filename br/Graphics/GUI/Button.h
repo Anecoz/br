@@ -35,6 +35,6 @@ private:
 	bool m_pressing;
 	Text* p_text;
 
-	function<void()> m_callback;
+	function<void()> f_callback;
 };
 

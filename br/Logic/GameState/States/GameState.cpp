@@ -1,12 +1,22 @@
 #include "GameState.h"
 #include "../StateMachine.h"
+#include "../../../Audio/AudioMaster.h"
+#include "../../../Graphics/Shaders/ShaderHandler.h"
+#include "../../../Graphics/Shadows/ShadowHandler.h"
+#include "../../../Graphics/Lighting/LightHandler.h"
 
 #include <iostream>
 
-GameState::GameState(StateMachine& machine, bool replace)
-	: State{ machine, replace } {
-	std::cout << "Game State Init.." << std::endl;
+GameState::GameState(StateMachine& machine, GLFWwindow& window, bool replace)
+	: State{ machine, window, replace } {
+	m_level = new Level("Resource/maps/map_01.tmx");
+	m_camera = new Camera(1280, 720);
 
+	ShadowHandler::calcShadowCaster(m_level);
+
+	AudioMaster::setListenerData(vec2(0), vec2(0));
+
+	std::cout << "Game State Init" << std::endl;
 }
 
 void GameState::pause() {
@@ -18,21 +28,22 @@ void GameState::resume() {
 }
 
 void GameState::update() {
-
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->update();
 	}
 }
 
 void GameState::render() {
+	ShadowHandler::calcShadowMap(LightHandler::lightList, m_camera->getProjection(), m_level);
 
+	m_level->render(m_camera->getProjection());
 }
 
 void GameState::cleanUp() {
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->remove();
 	}
-	for (Text* t : texts) {
+	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}

@@ -1,7 +1,7 @@
 #include "State.h"
 
-State::State(StateMachine& machine, bool replace) 
-	: m_machine{ machine }, m_replacing{ replace } {
+State::State(StateMachine& machine, GLFWwindow& window, bool replace)
+	: m_machine{ machine }, m_replacing{ replace }, m_window{ window } {
 
 }
 

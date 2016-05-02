@@ -24,7 +24,7 @@ Button::Button(string text, int textSize, glm::vec2 position, float width, float
 }
 
 void Button::setCallback(const std::function<void()> &callback) {
-	m_callback = callback;
+	f_callback = callback;
 }
 
 void Button::setupText() {
@@ -34,13 +34,14 @@ void Button::setupText() {
 void Button::update() {
 	glm::vec2 mouseGUIPos = MathUtils::screenSpaceToGUI(MousePosInput::getPosition());
 	bool isInside = MathUtils::isWithinGUIBox(mouseGUIPos, m_position.x, m_position.y - m_height, m_width, m_height);
-	if (MouseButtonInput::isMouseButtonClicked(GLFW_MOUSE_BUTTON_1)) {
-		cout << "GUI MOUSEPOS_X: " << mouseGUIPos.x << endl;
-		cout << "GUI MOUSEPOS_Y: " << mouseGUIPos.y << endl << endl;
-		if (isInside) {
+	if (MouseButtonInput::isMouseLeftDown()) {
+		if (!m_pressing && isInside) {
 			m_pressing = true;
-			m_callback();
 		}
+	}
+	else if (m_pressing && isInside) {
+		m_pressing = false;
+		f_callback();
 	}
 	else if (isInside) {
 		p_text->size = m_textSize * 1.5f;

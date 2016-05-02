@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <glm\glm.hpp>
@@ -16,8 +16,6 @@
 #include "Audio\AudioSource.h"
 
 #include "Font\FontRenderer.h"
-#include "Font\Text.h"
-#include "Graphics\GUI\Button.h"
 
 #include "Graphics\Shaders\ShaderHandler.h"
 
@@ -29,11 +27,14 @@ using namespace glm;
 
 static void errorCallback(int error, const char* description) {
 	cerr << description << endl;
-}
+}*/
 
-int main() {	
+#include "Logic\GameState\Application.h"
 
-	glfwSetErrorCallback(errorCallback);
+int main() {
+	Application app;
+	app.run();
+	/*glfwSetErrorCallback(errorCallback);
 
 	if (!glfwInit())
 		exit(-1);
@@ -68,31 +69,27 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 	cout << "Vendor: " << glGetString(GL_VENDOR) << endl;
 	cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
-	cout << "Supported OpenGL version: " << glGetString(GL_VERSION) << endl;
+	cout << "Supported OpenGL version: " << glGetString(GL_VERSION) << endl;*/
 
-	AudioMaster::init();
+	/*AudioMaster::init();
 	AudioMaster::setListenerData(vec2(0), vec2(0));
 	ALuint buffer = AudioMaster::loadSound("Resource/ambience_bird.wav");
 	AudioSource source;
 	source.setLooping(true);
 	source.setVolume(1.0f);
-	source.play(buffer);
+	source.play(buffer);*/
 
-	Level* level = new Level("Resource/maps/map_01.tmx");
-	Camera* camera = new Camera(1280, 720);
-	ShaderHandler::init();
+	/*Level* level = new Level("Resource/maps/map_01.tmx");
+	Camera* camera = new Camera(1280, 720);*/
+
+	/*ShaderHandler::init();
 	FontRenderer::init(1280, 720);
+	ShadowHandler::calcShadowCaster(level);*/
 
-	ShadowHandler::calcShadowCaster(level);
-	LightHandler::init();
-	ShadowHandler::init();
+	/*LightHandler::init();
+	ShadowHandler::init();*/
 
-	// TESTING
-	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0, 64);
-	Button* button = new Button("BUTTON", 30, glm::vec2(0.5f));
-	button->setCallback([] {cout << "CALBBACK TRIGGERD" << endl; });
-
-	using namespace chrono;
+	/*using namespace chrono;
 	long lastTime = duration_cast<nanoseconds>(high_resolution_clock::now().time_since_epoch()).count();
 	double delta = 0.0;
 	double ns = 1000000000.0 / 60.0;
@@ -109,8 +106,7 @@ int main() {
 		
 		// Logic Update
 		if (delta >= 1.0) {
-			glfwPollEvents();			
-			button->update();
+			glfwPollEvents();
 			updates++;
 			delta--;
 
@@ -135,14 +131,10 @@ int main() {
 			updates = 0;
 			frames = 0;
 		}
-	}
+	}*/
 
-	delete level;
+	/*delete level;
 	level = nullptr;
-	delete button;
-	button = nullptr;
-	delete text;
-	text = nullptr;
 	ShaderHandler::cleanUp();
-	FontRenderer::cleanUp();
+	FontRenderer::cleanUp();*/
 }

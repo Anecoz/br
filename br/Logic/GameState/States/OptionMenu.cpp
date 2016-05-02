@@ -3,17 +3,16 @@
 
 #include <iostream>
 
-OptionMenu::OptionMenu(StateMachine& machine, bool replace) 
-	: State{ machine, replace } {
-	std::cout << "Options Menu Init.." << std::endl;
+OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
+	: State{ machine, window, replace } {
 
 	Text* Titel = new Text("OPTIONS MENU", 0.4f, 0.1f, 40);
 
-	Button* applyButton = new Button("OPTIONS", 30, glm::vec2(0.45f, 0.35f));
-	Button* backButton = new Button("EXIT", 30, glm::vec2(0.45f, 0.45f));
+	Button* applyButton = new Button("APPLY", 30, glm::vec2(0.45f, 0.35f));
+	Button* backButton = new Button("BACK", 30, glm::vec2(0.45f, 0.45f));
 
 	applyButton->setCallback([this] {
-		std::cout << "APPLYING" << std::endl;
+		std::cout << "APPLYING TO CONFIG" << std::endl;
 		// Set config file
 	});
 	backButton->setCallback([this] {
@@ -21,10 +20,12 @@ OptionMenu::OptionMenu(StateMachine& machine, bool replace)
 		m_machine.lastState();
 	});
 
-	buttons.push_back(applyButton);
-	buttons.push_back(backButton);
+	m_buttons.push_back(applyButton);
+	m_buttons.push_back(backButton);
 
-	texts.push_back(Titel);
+	m_texts.push_back(Titel);
+
+	std::cout << "Options Menu Init" << std::endl;
 }
 
 void OptionMenu::pause() {
@@ -37,7 +38,7 @@ void OptionMenu::resume() {
 
 void OptionMenu::update() {
 
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->update();
 	}
 }
@@ -47,10 +48,10 @@ void OptionMenu::render() {
 }
 
 void OptionMenu::cleanUp() {
-	for (Button* b : buttons) {
+	for (Button* b : m_buttons) {
 		b->remove();
 	}
-	for (Text* t : texts) {
+	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}

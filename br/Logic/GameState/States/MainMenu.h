@@ -10,7 +10,7 @@ class StateMachine;
 
 class MainMenu : public State {
 public:
-	MainMenu(StateMachine& machine, bool replace = true);
+	MainMenu(StateMachine& machine, GLFWwindow& window ,bool replace = true);
 
 	void pause();
 	void resume();
@@ -18,7 +18,7 @@ public:
 	void render();
 
 private:
-	vector<Button*> buttons;
-	vector<Text*> texts;
+	vector<Button*> m_buttons;
+	vector<Text*> m_texts;
 	void cleanUp();
 };

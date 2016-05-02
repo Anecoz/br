@@ -10,6 +10,11 @@ public:
 	void run();
 
 private:
+	void InitWindowHandle();
+	void InitResources();
+
 	StateMachine m_machine;
+
+	GLFWwindow* m_window;
 };
 

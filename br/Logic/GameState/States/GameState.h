@@ -5,12 +5,13 @@
 #include "../State.h"
 #include "../../../Graphics/GUI/Button.h"
 #include "../../../Font/Text.h"
+#include "../../../Graphics/Camera.h"
 
 class StateMachine;
 
 class GameState : public State {
 public:
-	GameState(StateMachine& machine, bool replace = true);
+	GameState(StateMachine& machine, GLFWwindow& window, bool replace = true);
 
 	void pause();
 	void resume();
@@ -18,7 +19,10 @@ public:
 	void render();
 
 private:
-	vector<Button*> buttons;
-	vector<Text*> texts;
+	vector<Button*> m_buttons;
+	vector<Text*> m_texts;
 	void cleanUp();
+
+	Level* m_level;
+	Camera* m_camera;
 };

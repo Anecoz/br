@@ -20,7 +20,7 @@ public:
 	void quit() { m_running = false; }
 
 	template <typename T>
-	static std::unique_ptr<T> build(StateMachine& machine, bool replace = true);
+	static std::unique_ptr<T> build(StateMachine& machine, GLFWwindow& window, bool replace = true);
 
 private:
 	std::stack<std::unique_ptr<State>> m_states;
@@ -30,7 +30,7 @@ private:
 };
 
 template <typename T>
-std::unique_ptr<T> StateMachine::build(StateMachine& machine, bool replace) {
-	return std::unique_ptr<T>(new T(machine, replace));
+std::unique_ptr<T> StateMachine::build(StateMachine& machine, GLFWwindow& window, bool replace) {
+	return std::unique_ptr<T>(new T(machine, window, replace));
 }
 
