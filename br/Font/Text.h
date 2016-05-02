@@ -16,6 +16,12 @@ public:
 	float y;
 	int size;
 
+	bool getVisibility() { return visible; }
+	void setVisibility(bool val) { visible = val; }
+
 	bool operator==(const Text& rhs);
+
+private:
+	bool visible = true;
 };
 

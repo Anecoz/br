@@ -17,6 +17,8 @@ public:
 
 	void update();
 
+	void setVisibility(bool val) { p_text->setVisibility(val); }
+
 	float getWidth() { return m_width; };
 	float getHeight() { return m_height; };
 

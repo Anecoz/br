@@ -37,10 +37,24 @@ MainMenu::MainMenu(StateMachine& machine, GLFWwindow& window,bool replace)
 
 void MainMenu::pause() {
 	std::cout << "Main Menu Pause" << std::endl;
+	
+	for (auto it = m_buttons.begin(); it != m_buttons.end(); it++) {
+		(*it)->setVisibility(false);
+	}
+
+	for (auto it = m_texts.begin(); it != m_texts.end(); it++) {
+		(*it)->setVisibility(false);
+	}
 }
 
 void MainMenu::resume() {
 	std::cout << "Main Menu Resume" << std::endl;
+	for (auto it = m_buttons.begin(); it != m_buttons.end(); it++) {
+		(*it)->setVisibility(true);
+	}
+	for (auto it = m_texts.begin(); it != m_texts.end(); it++) {
+		(*it)->setVisibility(true);
+	}
 }
 
 void MainMenu::update() {

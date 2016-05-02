@@ -12,6 +12,14 @@ public:
 	DrawableEntity(Texture* texture, vec2& initPos, float layer);
 	~DrawableEntity();
 
+	float getWidth() { return width; }
+	float getHeight() { return height; }
+	vec2& getPosition() { return position; }
+	mat4& getRotation() { return rotation; }
+
+	void renderDisplay(mat4& projection);
+	void render(mat4& projection);
+
 protected:
 	Texture* texture;
 	vec2 position;
@@ -20,6 +28,8 @@ protected:
 	float width;
 	float height;
 	float scale;
+
+	void doRender(bool display, mat4& projection);
 
 private:
 	void init(float layer, vec2& initPos);

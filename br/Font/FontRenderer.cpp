@@ -79,6 +79,8 @@ void FontRenderer::render() {
 	ShaderHandler::fontShader->uploadVec(glm::vec4(1, 1, 1, 1), "color");
 	// Loop through all texts
 	for (Text* textEntry : textList) {
+		if (!textEntry->getVisibility())
+			continue;
 		const char* text = textEntry->text.c_str();
 		float x = textEntry->x;
 		float y = textEntry->y;
