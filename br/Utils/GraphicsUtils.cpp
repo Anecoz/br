@@ -1,6 +1,26 @@
 #include "GraphicsUtils.h"
 #include <iomanip>
 
+IndexedVertexArray* GraphicsUtils::createModelQuad(float width, float height, float layer) {
+	GLfloat* vertices = new GLfloat[12];
+	vertices[0] = 0.0f; vertices[1] = 0.0f; vertices[2] = layer;	
+	vertices[3] = 0.0f; vertices[4] = height; vertices[5] = layer;	
+	vertices[6] = width; vertices[7] = 0.0f; vertices[8] = layer;
+	vertices[9] = width; vertices[10] = height; vertices[11] = layer;
+
+	GLfloat* texCoords = new GLfloat[8];
+	texCoords[0] = 0.0f; texCoords[0] = 1.0f;
+	texCoords[0] = 0.0f; texCoords[0] = 0.0f;
+	texCoords[0] = 1.0f; texCoords[0] = 1.0f;
+	texCoords[0] = 1.0f; texCoords[0] = 0.0f;
+
+	GLuint* indices = new GLuint[6];
+	indices[0] = 0; indices[1] = 1; indices[2] = 2;
+	indices[3] = 2; indices[4] = 1; indices[5] = 3;
+	
+	return new IndexedVertexArray(vertices, texCoords, indices, 4, 6, 4, 3);
+}
+
 DynamicLevelVao* GraphicsUtils::createLevelQuad() {
 	GLfloat* vertices = new GLfloat[8];
 	vertices[0] = 0.0f;

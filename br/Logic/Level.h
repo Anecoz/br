@@ -19,6 +19,8 @@ public:
 
 	bool getIsShadowCasterAt(int x, int y);
 	bool getIsCollAt(int x, int y);
+	int getWidth();
+	int getHeight();
 
 	void render(mat4& projMatrix);
 private:

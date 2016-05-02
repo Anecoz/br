@@ -3,6 +3,8 @@
 #include "../Utils/GraphicsUtils.h"
 #include "../Graphics/Shaders/ShaderHandler.h"
 #include "../Graphics/Camera.h"
+#include "../Graphics/Shadows/ShadowHandler.h"
+#include "../Graphics/Lighting/LightHandler.h"
 #include <glm/gtx/transform.hpp>
 #include <vector>
 #include <math.h>
@@ -39,6 +41,14 @@ Level::~Level() {
 	mesh = nullptr;
 }
 
+int Level::getWidth() {
+	return map->GetWidth();
+}
+
+int Level::getHeight() {
+	return map->GetHeight();
+}
+
 bool Level::getIsProp(const string& name, int x, int y) {
 	MapTile tile1 = layer->GetTile(x, y);
 	const Tile* tile = tileSet->GetTile(tile1.id);
@@ -61,17 +71,19 @@ void Level::render(mat4& projMatrix) {
 
 	// Uniforms
 	ShaderHandler::levelShader->uploadMatrix(projMatrix, "projMatrix");
-	ShaderHandler::levelShader->uploadVec(vec2(0), "playerPos");
+	ShaderHandler::levelShader->uploadVec(vec2(10), "playerPos");
 	ShaderHandler::levelShader->uploadInt(map->GetWidth(), "worldWidth");
 	ShaderHandler::levelShader->uploadInt(map->GetHeight(), "worldHeight");
 	ShaderHandler::levelShader->uploadFloat(Camera::getWinSizeX(), "windowSizeX");
 	ShaderHandler::levelShader->uploadFloat(Camera::getWinSizeY(), "windowSizeY");
 	ShaderHandler::levelShader->uploadInt(1, "numLights");
+	ShaderHandler::levelShader->uploadVec(LightHandler::lightList.at(0), "lightPos");
 	ShaderHandler::levelShader->uploadVec(Camera::getPosition(), "camPos");
 	glActiveTexture(GL_TEXTURE0);
 	texAtlas->bind();
+	glActiveTexture(GL_TEXTURE1);
+	ShadowHandler::bindShadowMap();
 
-	//vector<GLfloat> tex1, tex2;
 	int size = ceil(Camera::getWinSizeX()) * ceil(Camera::getWinSizeY()) * 4;
 	GLfloat* tex1 = new GLfloat[size];
 	GLfloat* tex2 = new GLfloat[size];
@@ -97,5 +109,15 @@ void Level::render(mat4& projMatrix) {
 	delete[] tex2;
 
 	texAtlas->unbind();
+	ShadowHandler::unbindShadowMap();
 	ShaderHandler::levelShader->pissOff();
+
+	glActiveTexture(GL_TEXTURE0);
+	/*GLubyte* back = new GLubyte[25*25];
+	ShadowHandler::bindShadowMap();
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RED, GL_UNSIGNED_BYTE, back);
+
+	cout << "back at 5, 6: " << static_cast<unsigned>(back[6 * 25 + 5]) << endl;
+
+	delete[] back;*/
 }

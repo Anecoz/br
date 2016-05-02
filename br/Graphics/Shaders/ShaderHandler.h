@@ -6,6 +6,7 @@ class ShaderHandler {
 public:
 	static Shader* levelShader;
 	static Shader* fontShader;
+	static Shader* shadowMapShader;
 
 	static void init();
 

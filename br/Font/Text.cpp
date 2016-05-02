@@ -16,7 +16,6 @@ Text::Text(string text, float x, float y, int size) {
 
 Text::~Text() {
 	FontRenderer::removeText(this);
-	cout << "Destructor called!" << endl;
 }
 
 bool Text::operator==(const Text& rhs) {

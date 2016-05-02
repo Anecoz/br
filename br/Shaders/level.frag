@@ -7,7 +7,7 @@ in vec2 fragTexCoords;
 in vec2 fragWorldCoords;
 
 uniform sampler2D atlas;
-//uniform sampler2D shadowTex;
+uniform sampler2D shadowTex;
 uniform vec2 playerPos;
 uniform int worldWidth;
 uniform int worldHeight;
@@ -16,14 +16,14 @@ uniform float windowSizeY;
 uniform vec2 camPos;
 
 //uniform vec2 lightArr[50];
-//uniform vec2 lightPos;
+uniform vec2 lightPos;
 uniform int numLights = 0;
 
 const float DAMP_FACTOR = 0.2;
 const float EPS = 0.003;
 
 // Determines if a world position is inside a shadow caster or not
-/*int posInsideShadow(vec2 coords, int channel) {
+int posInsideShadow(vec2 coords, int channel) {
     // Convert world coordinates to texture coordinates
     vec2 texCoords = vec2((coords.x - camPos.x)/windowSizeX, (coords.y - camPos.y)/windowSizeY);
 
@@ -45,7 +45,7 @@ const float EPS = 0.003;
     else {
         return 0;
     }
-}*/
+}
 
 void main() {
     vec4 col = texture(atlas, vec2(fragTexCoords.x, 1.0 - fragTexCoords.y));
@@ -56,7 +56,7 @@ void main() {
 
     // Shadows
     // This does the player visibility
-    /*if (distance(fragWorldCoords, playerPos) < windowSizeX) {
+    if (distance(fragWorldCoords, playerPos) < windowSizeX) {
         if (posInsideShadow(fragWorldCoords, 1) == 1) {
             outColor = col*0.9;
         }
@@ -74,7 +74,7 @@ void main() {
                 outColor *= pow(dist, 3);
             }
         }
-    }*/
+    }
 }
 
 // Sample several closeby points as well

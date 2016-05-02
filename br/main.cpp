@@ -21,6 +21,9 @@
 
 #include "Graphics\Shaders\ShaderHandler.h"
 
+#include "Graphics\Shadows\ShadowHandler.h"
+#include "Graphics\Lighting\LightHandler.h"
+
 using namespace std;
 using namespace glm;
 
@@ -80,6 +83,10 @@ int main() {
 	ShaderHandler::init();
 	FontRenderer::init(1280, 720);
 
+	ShadowHandler::calcShadowCaster(level);
+	LightHandler::init();
+	ShadowHandler::init();
+
 	// TESTING
 	Text* text = new Text("Welcome to Kapperino Kapperoni", 0, 0, 64);
 	Button* button = new Button("BUTTON", 30, glm::vec2(0.5f));
@@ -113,6 +120,9 @@ int main() {
 
 		// Render
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+
+		ShadowHandler::calcShadowMap(LightHandler::lightList, camera->getProjection(), level);
+
 		level->render(camera->getProjection());
 		FontRenderer::render();
 		glfwSwapBuffers(window);

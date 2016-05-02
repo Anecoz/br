@@ -12,6 +12,7 @@ using namespace std;
 class GraphicsUtils {
 
 public:
+	static IndexedVertexArray* createModelQuad(float width, float height, float layer);
 	static DynamicLevelVao* createLevelQuad();
 	static IndexedVertexArray* createSimpleQuad();
 	static GLuint loadPNGToTexture(const char* fileName, unsigned& width, unsigned& height);
