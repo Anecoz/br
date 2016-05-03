@@ -12,20 +12,6 @@ out vec2 fragWorldCoords;
 uniform mat4 projMatrix;
 uniform vec2 texAtlasDimensions;
 uniform vec2 tileDimensions;
-//uniform int tileId;
-
-/*unsigned tilesPerRow = imWidth / tileWidth;
-			int topY = floor(id / tilesPerRow);
-			int leftX = id - tilesPerRow * topY;
-			topY = (int)((float)imHeight / (float)tileHeight) - topY;
-			texCoords.push_back((float)leftX * (float)tileHeight / (float)imWidth);
-			texCoords.push_back((float)topY * (float)tileHeight / (float)imHeight);
-			texCoords.push_back((float)leftX * (float)tileHeight / (float)imWidth);
-			texCoords.push_back((float)(topY - 1) * (float)tileHeight / (float)imHeight);
-			texCoords.push_back((leftX + 1) * (float)tileHeight / (float)imWidth);
-			texCoords.push_back((float)topY * (float)tileHeight / (float)imHeight);
-			texCoords.push_back((float)(leftX + 1) * (float)tileHeight / (float)imWidth);
-			texCoords.push_back((float)(topY - 1) * (float)tileHeight / (float)imHeight);*/
 
 void main() {
     // Calc tex coords
@@ -42,7 +28,7 @@ void main() {
         //fragTexCoords = texCoords1.xy;
     }
     else if (inPosition.x == 0.0 && inPosition.y == 1.0) {
-		fragTexCoords = vec2(leftX * tH/imW, (topY - 1.0) * tH/imH);
+		fragTexCoords = vec2(leftX * tH/imW, (topY - 1.0) * tH/imH + 1.0/imH);
         //fragTexCoords = texCoords1.zw;
     }
     else if (inPosition.x == 1.0 && inPosition.y == 0.0) {
@@ -50,7 +36,7 @@ void main() {
         //fragTexCoords = texCoords2.xy;
     }
     else if (inPosition.x == 1.0 && inPosition.y == 1.0) {
-		fragTexCoords = vec2((leftX + 1.0) * tH/imW, (topY - 1.0) * tH/imH);
+		fragTexCoords = vec2((leftX + 1.0) * tH/imW, (topY - 1.0) * tH/imH + 1.0/imH);
         //fragTexCoords = texCoords2.zw;
     }
     fragWorldCoords = vec2(inPosition.x + translation.x, inPosition.y + translation.y);

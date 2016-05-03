@@ -9,8 +9,8 @@ in vec2 fragWorldCoords;
 uniform sampler2D atlas;
 uniform sampler2D shadowTex;
 uniform vec2 playerPos;
-uniform int worldWidth;
-uniform int worldHeight;
+uniform float screenWidth;
+uniform float screenHeight;
 uniform float windowSizeX;
 uniform float windowSizeY;
 uniform vec2 camPos;
@@ -48,7 +48,7 @@ int posInsideShadow(vec2 coords, int channel) {
 }
 
 void main() {
-    vec4 col = texture(atlas, vec2(fragTexCoords.x, 1.0 - fragTexCoords.y));
+    vec4 col = texture(atlas, vec2(fragTexCoords.x + 0.5/screenWidth, 1.0 - fragTexCoords.y + 0.5/screenHeight));
     if (col.a < 0.5) {
         discard;
     }

@@ -79,8 +79,8 @@ void Level::render(mat4& projMatrix) {
 	// Uniforms
 	ShaderHandler::levelShader->uploadMatrix(projMatrix, "projMatrix");
 	ShaderHandler::levelShader->uploadVec(vec2(10), "playerPos");
-	ShaderHandler::levelShader->uploadInt(map->GetWidth(), "worldWidth");
-	ShaderHandler::levelShader->uploadInt(map->GetHeight(), "worldHeight");
+	ShaderHandler::levelShader->uploadFloat(1280.0, "screenWidth");
+	ShaderHandler::levelShader->uploadFloat(720.0, "screenHeight");
 	ShaderHandler::levelShader->uploadFloat(Camera::getWinSizeX(), "windowSizeX");
 	ShaderHandler::levelShader->uploadFloat(Camera::getWinSizeY(), "windowSizeY");
 	ShaderHandler::levelShader->uploadInt(1, "numLights");
