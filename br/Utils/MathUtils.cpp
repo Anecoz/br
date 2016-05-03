@@ -8,7 +8,7 @@ void MathUtils::GUItoOpenGLCoord(glm::vec2& guiPoint) {
 	guiPoint.y = -guiPoint.y * 2.0 + 1.0;
 }
 
-void MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int& screenWidth, int& screenHeight, glm::mat4& viewProj) {
+void MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int screenWidth, int screenHeight, glm::mat4& viewProj) {
 	double x = 2.0 * (double)screenPoint.x / (double)screenWidth - 1.0;
 	double y = -2.0 * (double)screenPoint.y / (double)screenHeight + 1.0;
 	glm::mat4 invProj = glm::inverse(viewProj);
@@ -56,4 +56,10 @@ int MathUtils::getInventoryItemIndex(glm::vec2& mousePosition, glm::vec2& positi
 	int indY = (int)floor((double)mFix.y / itemHeight);
 	
 	return indX + itemPerRow*indY;
+}
+
+float MathUtils::angle(glm::vec2& v1, glm::vec2& v2) {
+	float dot = v1.x * v2.x + v1.y * v2.y;
+	float det = v1.x * v2.y - v1.y * v2.x;
+	return atan2f(det, dot);
 }

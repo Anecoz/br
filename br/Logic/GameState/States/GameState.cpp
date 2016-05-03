@@ -11,6 +11,7 @@ GameState::GameState(StateMachine& machine, GLFWwindow& window, bool replace)
 	: State{ machine, window, replace } {
 	m_level = new Level("Resource/maps/map_01.tmx");
 	m_camera = new Camera(1280, 720);
+	m_player = new Player();
 
 	ShadowHandler::calcShadowCaster(m_level);
 
@@ -31,12 +32,16 @@ void GameState::update() {
 	for (Button* b : m_buttons) {
 		b->update();
 	}
+
+	m_camera->update(m_player->getPosition(), m_player->getSpeed(), m_level);
+	m_player->update(m_level, m_camera->getProjection());
 }
 
 void GameState::render() {
-	ShadowHandler::calcShadowMap(LightHandler::lightList, m_camera->getProjection(), m_level);
+	ShadowHandler::calcShadowMap(LightHandler::lightList, m_camera->getProjection(), m_level, m_player);
 
 	m_level->render(m_camera->getProjection());
+	m_player->render(m_camera->getProjection());
 }
 
 void GameState::cleanUp() {

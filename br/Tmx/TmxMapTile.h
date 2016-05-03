@@ -28,6 +28,10 @@
 #pragma once
 
 #include <math.h>
+#include <iostream>
+#include <vector>
+
+using std::vector;
 
 namespace Tmx 
 {
@@ -50,7 +54,8 @@ namespace Tmx
             , flippedHorizontally(false)
             , flippedVertically(false)
             , flippedDiagonally(false)
-        {}
+        {
+		}
 
         // Will take a gid and read the attributes from the first
         // two bits of it.
@@ -66,24 +71,23 @@ namespace Tmx
         }
 
 		// ANECOZ HACK
-		void setTexCoords(unsigned& imWidth, unsigned& imHeight, unsigned& tileWidth, unsigned& tileHeight) {
-			texCoords = new float[8];
+		void setTexCoords(unsigned& imWidth, unsigned& imHeight, unsigned& tileWidth, unsigned& tileHeight) {			
 			unsigned tilesPerRow = imWidth / tileWidth;
 			int topY = floor(id / tilesPerRow);
 			int leftX = id - tilesPerRow * topY;
 			topY = (int)((float)imHeight / (float)tileHeight) - topY;
-			texCoords[0] = (float)leftX * (float)tileHeight / (float)imWidth;
-			texCoords[1] = (float)topY * (float)tileHeight / (float)imHeight;
-			texCoords[2] = (float)leftX * (float)tileHeight / (float)imWidth;
-			texCoords[3] = (float)(topY - 1) * (float)tileHeight / (float)imHeight;
-			texCoords[4] = (leftX + 1) * (float)tileHeight / (float)imWidth;
-			texCoords[5] = (float)topY * (float)tileHeight / (float)imHeight;
-			texCoords[6] = (float)(leftX + 1) * (float)tileHeight / (float)imWidth;
-			texCoords[7] = (float)(topY - 1) * (float)tileHeight / (float)imHeight;
+			texCoords.push_back((float)leftX * (float)tileHeight / (float)imWidth);
+			texCoords.push_back((float)topY * (float)tileHeight / (float)imHeight);
+			texCoords.push_back((float)leftX * (float)tileHeight / (float)imWidth);
+			texCoords.push_back((float)(topY - 1) * (float)tileHeight / (float)imHeight);
+			texCoords.push_back((leftX + 1) * (float)tileHeight / (float)imWidth);
+			texCoords.push_back((float)topY * (float)tileHeight / (float)imHeight);
+			texCoords.push_back((float)(leftX + 1) * (float)tileHeight / (float)imWidth);
+			texCoords.push_back((float)(topY - 1) * (float)tileHeight / (float)imHeight);
 		}
 
 		// ANECOZ HACK
-		float* texCoords = nullptr;
+		vector<float> texCoords;
 
         // Tileset id.
         int tilesetId;		

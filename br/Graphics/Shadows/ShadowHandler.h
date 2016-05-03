@@ -2,6 +2,7 @@
 
 #include "ShadowCasterTexture.h"
 #include "../../Logic/Level.h"
+#include "../../Logic/Player.h"
 #include <vector>
 #include <glm\glm.hpp>
 
@@ -18,7 +19,7 @@ public:
 
 	static void init();
 	static void calcShadowCaster(Level* level);
-	static void calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level);
+	static void calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level, Player* player);
 	
 	static void bindShadowMap();
 	static void unbindShadowMap();

@@ -6,6 +6,7 @@
 #include "../../../Graphics/GUI/Button.h"
 #include "../../../Font/Text.h"
 #include "../../../Graphics/Camera.h"
+#include "../../Player.h"
 
 class StateMachine;
 
@@ -25,4 +26,5 @@ private:
 
 	Level* m_level;
 	Camera* m_camera;
+	Player* m_player;
 };

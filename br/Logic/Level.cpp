@@ -30,6 +30,13 @@ Level::Level(const string& fileName) {
 	texAtlas = new Texture(tileSet->GetImage()->GetSource(), 1.0f);
 
 	mesh = GraphicsUtils::createLevelQuad();
+
+	const Tileset* tileset = map->GetTileset(layer->GetTileTilesetIndex(0, 0));
+	const Image* tileImage = tileset->GetImage();
+	texAtlasWidth = tileImage->GetWidth();
+	texAtlasHeight = tileImage->GetHeight();
+	tileHeight = map->GetTileset(layer->GetTileTilesetIndex(0, 0))->GetTileHeight();
+	tileWidth = map->GetTileset(layer->GetTileTilesetIndex(0, 0))->GetTileWidth();
 }
 
 Level::~Level() {
@@ -67,7 +74,7 @@ bool Level::getIsShadowCasterAt(int x, int y) {
 }
 
 void Level::render(mat4& projMatrix) {
-	ShaderHandler::levelShader->comeHere();
+	ShaderHandler::levelShader->comeHere();	
 
 	// Uniforms
 	ShaderHandler::levelShader->uploadMatrix(projMatrix, "projMatrix");
@@ -79,34 +86,63 @@ void Level::render(mat4& projMatrix) {
 	ShaderHandler::levelShader->uploadInt(1, "numLights");
 	ShaderHandler::levelShader->uploadVec(LightHandler::lightList.at(0), "lightPos");
 	ShaderHandler::levelShader->uploadVec(Camera::getPosition(), "camPos");
+	ShaderHandler::levelShader->uploadVec(vec2(texAtlasWidth, texAtlasHeight), "texAtlasDimensions");
+	ShaderHandler::levelShader->uploadVec(vec2(tileWidth, tileHeight), "tileDimensions");
 	glActiveTexture(GL_TEXTURE0);
 	texAtlas->bind();
 	glActiveTexture(GL_TEXTURE1);
 	ShadowHandler::bindShadowMap();
 
-	int size = ceil(Camera::getWinSizeX()) * ceil(Camera::getWinSizeY()) * 4;
-	GLfloat* tex1 = new GLfloat[size];
-	GLfloat* tex2 = new GLfloat[size];
+	//int size = Camera::getWinSizeX() * Camera::getWinSizeY() * 4;
+	//GLfloat* tex1 = new GLfloat[size];
+	//GLfloat* tex2 = new GLfloat[size];
+	//vector<GLfloat> tex1;
+	//vector<GLfloat> tex2;
+	vector<GLfloat> trans;
+	vector<GLfloat> ids;
 	int numTiles = 0;
-	int incrementer = 0;
+	//int incrementer = 0;
 	// Loop and get correct tiles to draw
-	for (int y = (int)Camera::getPosition().y; y < Camera::getPosition().y + Camera::getWinSizeY(); y++) {
-		for (int x = (int)Camera::getPosition().x; x < Camera::getPosition().x + Camera::getWinSizeX(); x++) {
-			GLfloat* texCoords = layer->GetTile(x, y).texCoords;
+	vec2 c = Camera::getPosition();
+	float fcx = floor(c.x);
+	float fcy = floor(c.y);
+	int maxX = this->getWidth() - 1;
+	int maxY = this->getHeight() - 1;
+	for (int y = fcy - 1; y < fcy + Camera::getWinSizeY() + 1; y++) {
+		for (int x = fcx - 1; x < fcx + Camera::getWinSizeX() + 1; x++) {
+			if (x < 0 || x > maxX || y < 0 || y > maxY)
+				continue;
+			GLfloat* texCoords = &(layer->GetTile(x, y).texCoords)[0];
 
 			// Fill the VBOs
-			tex1[incrementer] = texCoords[0]; tex2[incrementer] = texCoords[4]; incrementer++;
+			/*tex1[incrementer] = texCoords[0]; tex2[incrementer] = texCoords[4]; incrementer++;
 			tex1[incrementer] = texCoords[1]; tex2[incrementer] = texCoords[5]; incrementer++;
 			tex1[incrementer] = texCoords[2]; tex2[incrementer] = texCoords[6]; incrementer++;
-			tex1[incrementer] = texCoords[3]; tex2[incrementer] = texCoords[7]; incrementer++;
+			tex1[incrementer] = texCoords[3]; tex2[incrementer] = texCoords[7]; incrementer++;*/
+
+			/*tex1.push_back(texCoords[0]);
+			tex1.push_back(texCoords[1]);
+			tex1.push_back(texCoords[2]);
+			tex1.push_back(texCoords[3]);
+			tex2.push_back(texCoords[4]);
+			tex2.push_back(texCoords[5]);
+			tex2.push_back(texCoords[6]);
+			tex2.push_back(texCoords[7]);*/
+
+			trans.push_back(x);
+			trans.push_back(y);
+
+			ids.push_back(layer->GetTile(x, y).id);
 
 			numTiles++;
 		}	
 	}
-	mesh->modifyTexBuffers(tex1, tex2, size);
+	//mesh->modifyTexBuffers(&tex1[0], &tex2[0], tex1.size());
+	mesh->modifyTranslationBuffer(&trans[0], trans.size());
+	mesh->modifyIdBuffer(&ids[0], ids.size());
 	mesh->drawInstances(numTiles);
-	delete[] tex1;
-	delete[] tex2;
+	//delete[] tex1;
+	//delete[] tex2;
 
 	texAtlas->unbind();
 	ShadowHandler::unbindShadowMap();

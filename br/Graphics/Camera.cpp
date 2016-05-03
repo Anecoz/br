@@ -63,16 +63,16 @@ void Camera::updateCameraMovement(vec2& playerPos, float playerSpeed, Level* lev
 	}
 
 	// Check camera map bounds
-	/*if (position.x < level.getBounds().x) {
+	if (position.x < 0) {
 		position.x = tempPos.x;
 	}
-	if (position.y < level.getBounds().y) {
+	if (position.y < 0) {
 		position.y = tempPos.y;
 	}
-	if ((position.x + WIN_SIZE_X) > level.getBounds().width) {
+	if ((position.x + WIN_SIZE_X) > level->getWidth()) {
 		position.x = tempPos.x;
 	}
-	if ((position.y + WIN_SIZE_Y) > level.getBounds().height) {
+	if ((position.y + WIN_SIZE_Y) > level->getHeight()) {
 		position.y = tempPos.y;
-	}*/
+	}
 }

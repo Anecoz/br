@@ -28,6 +28,11 @@ private:
 	const TileLayer* layer;
 	const Tileset* tileSet;
 
+	int texAtlasHeight;
+	int texAtlasWidth;
+	int tileWidth;
+	int tileHeight;
+
 	DynamicLevelVao* mesh;
 
 	Texture* texAtlas;

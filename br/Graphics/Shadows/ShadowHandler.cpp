@@ -29,8 +29,8 @@ void ShadowHandler::calcShadowCaster(Level* level) {
 	shadowCasterTexture->convertToTexture();
 }
 
-void ShadowHandler::calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level) {
-	ShadowMap::calcShadowMap(lightArr, proj, level);
+void ShadowHandler::calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level, Player* player) {
+	ShadowMap::calcShadowMap(lightArr, proj, level, player);
 }
 
 void ShadowHandler::bindShadowMap() {

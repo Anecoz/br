@@ -9,10 +9,10 @@ IndexedVertexArray* GraphicsUtils::createModelQuad(float width, float height, fl
 	vertices[9] = width; vertices[10] = height; vertices[11] = layer;
 
 	GLfloat* texCoords = new GLfloat[8];
-	texCoords[0] = 0.0f; texCoords[0] = 1.0f;
-	texCoords[0] = 0.0f; texCoords[0] = 0.0f;
-	texCoords[0] = 1.0f; texCoords[0] = 1.0f;
-	texCoords[0] = 1.0f; texCoords[0] = 0.0f;
+	texCoords[0] = 0.0f; texCoords[1] = 1.0f;
+	texCoords[2] = 0.0f; texCoords[3] = 0.0f;
+	texCoords[4] = 1.0f; texCoords[5] = 1.0f;
+	texCoords[6] = 1.0f; texCoords[7] = 0.0f;
 
 	GLuint* indices = new GLuint[6];
 	indices[0] = 0; indices[1] = 1; indices[2] = 2;
@@ -81,6 +81,8 @@ GLuint GraphicsUtils::loadPNGToTexture(const char* fileName, unsigned& width, un
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &image[0]);
 	glBindTexture(GL_TEXTURE_2D, 0);
 

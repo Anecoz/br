@@ -3,6 +3,7 @@
 #include "../Lowlevel/Fbo.h"
 #include "../Lowlevel/IndexedVertexArray.h"
 #include "../../Logic/Level.h"
+#include "../../Logic/Player.h"
 #include <vector>
 #include <glm\glm.hpp>
 
@@ -18,7 +19,7 @@ public:
 	static GLuint shadowMapID;
 
 	static void init();
-	static void calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level); // ADD PLAYER
+	static void calcShadowMap(vector<vec2>& lightArr, mat4& proj, Level* level, Player* player);
 
 private:
 	static Fbo* fbo;

@@ -62,7 +62,7 @@ void main() {
         }
     }
 
-    if (numLights > 0) {
+    /*if (numLights > 0) {
         //vec2 lightPos = lightArr[0];
         if (distance(fragWorldCoords, lightPos) < windowSizeX) {
             float maxDist = 5.0;
@@ -74,7 +74,7 @@ void main() {
                 outColor *= pow(dist, 3);
             }
         }
-    }
+    }*/
 }
 
 // Sample several closeby points as well
