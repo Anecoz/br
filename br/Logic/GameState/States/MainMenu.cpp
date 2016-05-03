@@ -15,6 +15,7 @@ MainMenu::MainMenu(StateMachine& machine, GLFWwindow& window,bool replace)
 
 	playButton->setCallback([this] {
 		m_next = StateMachine::build<GameState>(m_machine, m_window, true);
+		b_cleanMe = true;
 	});
 	optionButton->setCallback([this] {
 		m_next = StateMachine::build<OptionMenu>(m_machine, m_window , false);

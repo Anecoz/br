@@ -8,6 +8,7 @@
 #include "../../Graphics/Shadows/ShadowHandler.h"
 #include "../../Graphics/Lighting/LightHandler.h"
 #include "../../Utils/ResourceHandler.h"
+#include "../../Utils/ConfigUtils.h"
 
 #include <iostream>
 #include <chrono>
@@ -120,6 +121,7 @@ void Application::InitWindowHandle() {
 }
 
 void Application::InitResources() {
+	ConfigUtils::readConfig();
 	AudioMaster::init();
 	ShaderHandler::init();
 	FontRenderer::init(1280, 720);
