@@ -25,6 +25,11 @@ void OverState::update() {
 	for (Button* b : m_buttons) {
 		b->update();
 	}
+
+	if (b_cleanMe) {
+		cleanUp();
+		b_cleanMe = false;
+	}
 }
 
 void OverState::render() {
@@ -34,9 +39,13 @@ void OverState::render() {
 void OverState::cleanUp() {
 	for (Button* b : m_buttons) {
 		b->remove();
+		delete b;
 	}
 	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}
+
+	m_buttons.clear();
+	m_texts.clear();
 }

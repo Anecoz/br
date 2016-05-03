@@ -1,4 +1,5 @@
 #include "OptionMenu.h"
+#include "MainMenu.h"
 #include "../StateMachine.h"
 
 #include <iostream>
@@ -16,8 +17,8 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 		// Set config file
 	});
 	backButton->setCallback([this] {
-		cleanUp();
-		m_machine.lastState();
+		m_next = StateMachine::build<MainMenu>(m_machine, m_window, false);
+		b_cleanMe = true;
 	});
 
 	m_buttons.push_back(applyButton);
@@ -30,16 +31,35 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 
 void OptionMenu::pause() {
 	std::cout << "Options Menu Pause" << std::endl;
+
+	for (Button* b : m_buttons) {
+		b->setVisibility(false);
+	}
+	for (Text* t : m_texts) {
+		t->setVisibility(false);
+	}
 }
 
 void OptionMenu::resume() {
 	std::cout << "Options Menu Resume" << std::endl;
+
+	for (Button* b : m_buttons) {
+		b->setVisibility(true);
+	}
+	for (Text* t : m_texts) {
+		t->setVisibility(true);
+	}
 }
 
 void OptionMenu::update() {
 
 	for (Button* b : m_buttons) {
 		b->update();
+	}
+
+	if (b_cleanMe) {
+		cleanUp();
+		b_cleanMe = false;
 	}
 }
 
@@ -50,9 +70,13 @@ void OptionMenu::render() {
 void OptionMenu::cleanUp() {
 	for (Button* b : m_buttons) {
 		b->remove();
+		delete b;
 	}
 	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}
+
+	m_buttons.clear();
+	m_texts.clear();
 }

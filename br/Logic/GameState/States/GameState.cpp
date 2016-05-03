@@ -33,6 +33,10 @@ void GameState::update() {
 		b->update();
 	}
 
+	if (b_cleanMe) {
+		cleanUp();
+		b_cleanMe = false;
+	}
 	m_camera->update(m_player->getPosition(), m_player->getSpeed(), m_level);
 	m_player->update(m_level, m_camera->getProjection());
 }
@@ -47,9 +51,18 @@ void GameState::render() {
 void GameState::cleanUp() {
 	for (Button* b : m_buttons) {
 		b->remove();
+		delete b;
 	}
 	for (Text* t : m_texts) {
 		delete t;
 		t = nullptr;
 	}
+
+	m_buttons.clear();
+	m_texts.clear();
+
+	delete m_level;
+	m_level = nullptr;
+	delete m_camera;
+	m_camera = nullptr;
 }

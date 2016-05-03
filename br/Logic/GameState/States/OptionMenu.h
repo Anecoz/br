@@ -21,4 +21,6 @@ private:
 	vector<Button*> m_buttons;
 	vector<Text*> m_texts;
 	void cleanUp();
+
+	bool b_cleanMe;
 };

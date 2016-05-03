@@ -24,6 +24,8 @@ private:
 	vector<Text*> m_texts;
 	void cleanUp();
 
+	bool b_cleanMe;
+
 	Level* m_level;
 	Camera* m_camera;
 	Player* m_player;
