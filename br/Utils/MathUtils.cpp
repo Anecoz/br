@@ -3,6 +3,11 @@
 #include "MathUtils.h"
 #include "../Graphics/Camera.h"
 
+void MathUtils::GUItoOpenGLCoord(glm::vec2& guiPoint, glm::vec2* toChange) {
+	toChange->x = guiPoint.x * 2.0 - 1.0;
+	toChange->y = -guiPoint.y * 2.0 + 1.0;
+}
+
 void MathUtils::GUItoOpenGLCoord(glm::vec2& guiPoint) {
 	guiPoint.x = guiPoint.x * 2.0 - 1.0;
 	guiPoint.y = -guiPoint.y * 2.0 + 1.0;

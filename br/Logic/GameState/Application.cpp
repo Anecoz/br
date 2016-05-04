@@ -99,7 +99,7 @@ void Application::InitWindowHandle() {
 	}
 
 	glfwMakeContextCurrent(m_window);
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 
 	// Set input callbacks
 	glfwSetKeyCallback(m_window, KeyInput::invoke);

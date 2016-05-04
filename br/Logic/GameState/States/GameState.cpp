@@ -9,7 +9,7 @@
 
 GameState::GameState(StateMachine& machine, GLFWwindow& window, bool replace)
 	: State{ machine, window, replace } {
-	m_level = new Level("Resource/maps/64res.tmx");
+	m_level = new Level("Resource/maps/map_01.tmx");
 	m_camera = new Camera(1280, 720);
 	m_player = new Player();
 

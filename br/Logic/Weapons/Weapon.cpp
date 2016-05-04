@@ -100,5 +100,5 @@ Bullet* Weapon::spawnAmmo() {
 		this->position.y + this->height / 2.0f - ResourceHandler::bulletTexture->getHeightAfterScale() / 2.0f
 	};
 	vec2 bulletVel{ this->forward.x, this->forward.y };
-	return new Bullet(bulletPos, bulletVel*0.01f, damage, 0);
+	return new Bullet(bulletPos, bulletVel*0.1f, damage, 0);
 }

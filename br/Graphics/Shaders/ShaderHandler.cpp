@@ -6,12 +6,19 @@ Shader* ShaderHandler::levelShader;
 Shader* ShaderHandler::fontShader;
 Shader* ShaderHandler::shadowMapShader;
 Shader* ShaderHandler::standardShader;
+Shader* ShaderHandler::guiShader;
 
 void ShaderHandler::init() {
 	levelShader = new Shader("Shaders/level.vert", "Shaders/level.frag");
 	fontShader = new Shader("Shaders/font.vert", "Shaders/font.frag");
 	shadowMapShader = new Shader("Shaders/shadows/shadowMap.vert", "Shaders/shadows/shadowMap.frag");
 	standardShader = new Shader("Shaders/standard.vert", "Shaders/standard.frag");
+	guiShader = new Shader("Shaders/gui.vert", "Shaders/gui.frag");
+
+	guiShader->comeHere();
+	glActiveTexture(GL_TEXTURE0);
+	guiShader->uploadTexture(0, std::string("tex"));
+	guiShader->pissOff();
 
 	fontShader->comeHere();
 	glActiveTexture(GL_TEXTURE0);
@@ -42,4 +49,6 @@ void ShaderHandler::cleanUp() {
 	delete levelShader;	levelShader = nullptr;
 	delete fontShader;	fontShader = nullptr;
 	delete shadowMapShader; shadowMapShader = nullptr;
+	delete standardShader; standardShader = nullptr;
+	delete guiShader; guiShader = nullptr;
 }

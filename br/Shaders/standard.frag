@@ -50,11 +50,11 @@ void main() {
 
     // Shadows
     // This does the player visibility
-    /*if (posInsideShadow(fragWorldPos, 1) == 1) {
+    if (posInsideShadow(fragWorldPos, 1) == 1) {
         discard;
         //outColor *= 0;
     }
-    else if (numLights > 0) {
+    /*else if (numLights > 0) {
          //vec2 lightPos = lightArr[0];
          if (distance(fragWorldPos, lightPos) < windowSizeX) {
              float maxDist = 5.0;
