@@ -8,6 +8,7 @@ public:
 	static Shader* fontShader;
 	static Shader* shadowMapShader;
 	static Shader* standardShader;
+	static Shader* guiShader;
 
 	static void init();
 
