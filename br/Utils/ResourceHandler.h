@@ -13,11 +13,15 @@ public:
 	static void cleanUp();
 
 	static Texture* playerTexture;
-	static IndexedVertexArray* playerQuad; 
-
 	static Texture* sliderTexture;
-	static IndexedVertexArray* sliderQuad;
+	static Texture* assaultRifleTexture;
+	static Texture* assaultRifleDisplayTexture;
+	static Texture* bulletTexture;
 
+	static IndexedVertexArray* playerQuad;
+	static IndexedVertexArray* sliderQuad;
+	static IndexedVertexArray* assaultRifleQuad;
+	static IndexedVertexArray* bulletQuad;
 private:
 	
 };

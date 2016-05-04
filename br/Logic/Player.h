@@ -3,6 +3,7 @@
 #include "DrawableEntity.h"
 #include "../Utils/ResourceHandler.h"
 #include "Level.h"
+#include "Weapons\AssaultRifle.h"
 #include <glm\glm.hpp>
 
 using namespace glm;
@@ -17,6 +18,8 @@ public:
 	float getSpeed() { return SPEED; }
 	vec2& getForward() { return forward; }
 
+	void render(mat4& proj) override;
+
 private:
 	static const float SPEED;
 	int health = 100;
@@ -30,6 +33,8 @@ private:
 
 	bool anyRunningKeysDown();
 	bool noRunningKeysDown();
+
+	AssaultRifle* rifle;
 
 };
 

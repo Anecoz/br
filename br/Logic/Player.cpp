@@ -10,6 +10,7 @@ const float Player::SPEED = 0.06f;
 
 Player::Player() : DrawableEntity(ResourceHandler::playerTexture, vec2(10), -0.3f) {
 	this->mesh = ResourceHandler::playerQuad;
+	rifle = new AssaultRifle(position, -0.2f, AssaultRifle::MAG_SIZE, 40, 800, 10);
 }
 
 Player::~Player() {
@@ -19,8 +20,10 @@ Player::~Player() {
 void Player::update(Level* level, mat4& proj) {
 	updateMovement(level);
 	checkRunningStatus();
+	rifle->checkFire();	
 
 	updateForward(proj);
+	rifle->update(this->forward, this->position, this->rotation);
 }
 
 void Player::updateMovement(Level* level) {
@@ -45,6 +48,11 @@ void Player::updateMovement(Level* level) {
 		if (CollisionHandler::checkPlayerCollision(this, level))
 			position.x = tmp.x;
 	}
+}
+
+void Player::render(mat4& proj) {
+	DrawableEntity::render(proj);
+	rifle->render(proj);
 }
 
 bool Player::isDead() {
