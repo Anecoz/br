@@ -83,6 +83,7 @@ void Application::run() {
 	// Cleanup stuff
 	FontRenderer::cleanUp();
 	ShaderHandler::cleanUp();
+	ResourceHandler::cleanUp();
 }
 
 void Application::InitWindowHandle() {

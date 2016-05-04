@@ -8,8 +8,7 @@
 
 using namespace std;
 
-class Button
-{
+class Button {
 public:
 	Button(string text, int textSize, glm::vec2 position);
 	Button(string text, int textSize, glm::vec2 position, float width, float height);
@@ -17,7 +16,7 @@ public:
 
 	void update();
 
-	void setVisibility(bool val) { p_text->setVisibility(val); }
+	void setVisibility(bool value) { p_text->setVisibility(value); }
 
 	float getWidth() { return m_width; };
 	float getHeight() { return m_height; };
@@ -26,6 +25,7 @@ public:
 	void setCallback(const std::function<void()> &callback);
 
 	void remove();
+
 private:
 	void setupText();
 

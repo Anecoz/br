@@ -4,6 +4,8 @@
 vec2 Camera::position{ 0.0f };
 float Camera::WIN_SIZE_X = 0.0f;
 float Camera::WIN_SIZE_Y = 0.0f;
+mat4 Camera::projection;
+mat4 Camera::lookAtMat;
 
 Camera::Camera(int width, int height) {
 	invAr = (float)height / (float)width;

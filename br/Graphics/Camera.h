@@ -21,11 +21,11 @@ public:
 	static float getWinSizeY() { return WIN_SIZE_Y; }
 	static void setPosition(vec2& posIn) { position = posIn; }
 	static vec2& getPosition() { return position; }
-	mat4& getProjection();
+	static mat4& getProjection();
 
 private:
-	mat4 projection;
-	mat4 lookAtMat;
+	static mat4 projection;
+	static mat4 lookAtMat;
 	static vec2 position;
 	float invAr;
 	static float WIN_SIZE_X;

@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "../StateMachine.h"
 #include "../../../Utils/ConfigUtils.h"
+#include "../../../Graphics/Camera.h"
 
 #include <iostream>
 
@@ -10,9 +11,10 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 
 	Text* Titel = new Text("OPTIONS MENU", 0.4f, 0.1f, 40);
 
-	Text* vsyncLabel = new Text("VSYNC", 0.3f, 0.25f, 40);
+	Text* vsyncLabel = new Text("VSYNC", 0.3f, 0.25f, 20);
 	Text* resolutionLabel = new Text("RESOLUTION", 0.3f, 0.3f, 20);
 	Text* volumeLabel = new Text("VOLUME", 0.3f, 0.35f, 20);
+	slider = new Slider(glm::vec2(0.5f, 0.5f), 0.1f, ConfigUtils::VOLUME);
 
 	Button* applyButton = new Button("APPLY", 30, glm::vec2(0.83f, 0.95f));
 	Button* backButton = new Button("BACK", 30, glm::vec2(0.1f, 0.95f));
@@ -22,6 +24,7 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 		// Set config file
 		ConfigUtils::setAllValues();
 		ConfigUtils::saveConfig();
+		// TODO: Create new window with new parameters from the config file
 	});
 	backButton->setCallback([this] {
 		m_next = StateMachine::build<MainMenu>(m_machine, m_window, false);
@@ -66,7 +69,7 @@ void OptionMenu::update() {
 		b->update();
 	}
 
-	
+	//slider->update();
 
 	if (b_cleanMe) {
 		cleanUp();
@@ -75,7 +78,8 @@ void OptionMenu::update() {
 }
 
 void OptionMenu::render() {
-
+	/*if(slider != nullptr)
+		slider->render();*/
 }
 
 void OptionMenu::cleanUp() {
@@ -87,6 +91,9 @@ void OptionMenu::cleanUp() {
 		delete t;
 		t = nullptr;
 	}
+
+	delete slider;
+	slider = nullptr;
 
 	m_buttons.clear();
 	m_texts.clear();

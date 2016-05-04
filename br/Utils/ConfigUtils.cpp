@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <errno.h>
 
+// [VIDEO]
 int ConfigUtils::VSYNC;
 int ConfigUtils::WIDTH;
 int ConfigUtils::HEIGHT;
+// [SOUND]
 float ConfigUtils::VOLUME;
 
 CSimpleIniA ConfigUtils::ini(true, false, false);
@@ -27,11 +29,11 @@ bool ConfigUtils::readConfig() {
 		ConfigUtils::ini.GetAllKeys(i->pItem, keys);
 	}
 
-	// VIDEO section
+	// [VIDEO] section
 	ConfigUtils::VSYNC = std::stoi(ConfigUtils::ini.GetValue("VIDEO", "vsync", "1"));
 	ConfigUtils::WIDTH = std::stoi(ConfigUtils::ini.GetValue("VIDEO", "width", "1280"));
 	ConfigUtils::HEIGHT = std::stoi(ConfigUtils::ini.GetValue("VIDEO", "height","720"));
-	// SOUND section
+	// [SOUND] section
 	ConfigUtils::VOLUME = std::stof(ConfigUtils::ini.GetValue("SOUND", "volume", "0.5"));
 
 	return true;
@@ -61,10 +63,10 @@ bool ConfigUtils::setValue(std::string section, std::string key, std::string val
 }
 
 void ConfigUtils::setAllValues() {
-	// VIDEO section
+	// [VIDEO] section
 	setValue("VIDEO", "vsync", std::to_string(ConfigUtils::VSYNC).c_str());
 	setValue("VIDEO", "width", std::to_string(ConfigUtils::WIDTH).c_str());
 	setValue("VIDEO", "height", std::to_string(ConfigUtils::HEIGHT).c_str());
-	// SOUND section
+	// [SOUND] section
 	setValue("SOUND", "volume", std::to_string(ConfigUtils::VOLUME).c_str());
 }

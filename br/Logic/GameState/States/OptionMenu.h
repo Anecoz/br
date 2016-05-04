@@ -4,6 +4,7 @@
 
 #include "../State.h"
 #include "../../../Graphics/GUI/Button.h"
+#include "../../../Graphics/GUI/Slider.h"
 #include "../../../Font/Text.h"
 
 class StateMachine;
@@ -20,7 +21,8 @@ public:
 private:
 	vector<Button*> m_buttons;
 	vector<Text*> m_texts;
-	void cleanUp();
+	Slider* slider;
 
+	void cleanUp();
 	bool b_cleanMe;
 };

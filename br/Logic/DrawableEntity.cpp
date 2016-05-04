@@ -5,8 +5,10 @@
 #include "../Graphics/Camera.h"
 #include "../Graphics/Lighting/LightHandler.h"
 #include "../Logic/Player.h"
-#include <typeinfo>
+#include "../Graphics/GUI/Slider.h"
+#include "../Graphics/GUI/CheckBox.h"
 
+#include <typeinfo>
 #include <glm\gtx\transform.hpp>
 
 DrawableEntity::DrawableEntity(Texture* texture, vec2& initPos, float layer) {
@@ -15,10 +17,12 @@ DrawableEntity::DrawableEntity(Texture* texture, vec2& initPos, float layer) {
 }
 
 DrawableEntity::~DrawableEntity() {
-	if (typeid(this) != typeid(Player)) {
+	/*if (typeid(this) != typeid(Player) && 
+		typeid(this) != typeid(Slider) &&
+		typeid(this) != typeid(CheckBox)) {
 		delete mesh; mesh = nullptr;
 		delete texture; texture = nullptr;
-	}	
+	}	*/
 }
 
 void DrawableEntity::init(float layer, vec2& initPos) {
