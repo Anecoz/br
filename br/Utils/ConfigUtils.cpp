@@ -36,6 +36,13 @@ bool ConfigUtils::readConfig() {
 	// [SOUND] section
 	ConfigUtils::VOLUME = std::stof(ConfigUtils::ini.GetValue("SOUND", "volume", "0.5"));
 
+	float result = (float)ConfigUtils::WIDTH / (float)ConfigUtils::HEIGHT;
+	if (result < 1.77 || result > 1.78) {
+		ConfigUtils::WIDTH = 1280;
+		ConfigUtils::HEIGHT = 720;
+		ConfigUtils::setAllValues();
+		ConfigUtils::saveConfig();
+	}
 	return true;
 }
 bool ConfigUtils::saveConfig() {

@@ -5,6 +5,7 @@
 #include "../State.h"
 #include "../../../Graphics/GUI/Button.h"
 #include "../../../Graphics/GUI/Slider.h"
+#include "../../../Graphics/GUI/CheckBox.h"
 #include "../../../Font/Text.h"
 
 class StateMachine;
@@ -22,6 +23,8 @@ private:
 	vector<Button*> m_buttons;
 	vector<Text*> m_texts;
 	Slider* slider;
+	Text* volumeValue;
+	CheckBox* checkbox;
 
 	void cleanUp();
 	bool b_cleanMe;

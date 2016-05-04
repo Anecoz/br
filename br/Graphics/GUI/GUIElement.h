@@ -14,8 +14,10 @@ public:
 
 	void render();
 
-private:
+protected:
 	vec2 position;
-	IndexedVertexArray* mesh;
 	Texture* texture;
+
+private:
+	IndexedVertexArray* mesh;
 };

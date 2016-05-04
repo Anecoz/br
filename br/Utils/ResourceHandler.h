@@ -14,12 +14,15 @@ public:
 
 	static Texture* playerTexture;
 	static Texture* sliderTexture;
+	static Texture* checkboxONTexture;
+	static Texture* checkboxOFFTexture;
 	static Texture* assaultRifleTexture;
 	static Texture* assaultRifleDisplayTexture;
 	static Texture* bulletTexture;
 
 	static IndexedVertexArray* playerQuad;
 	static IndexedVertexArray* sliderQuad;
+	static IndexedVertexArray* checkBoxQuad;
 	static IndexedVertexArray* assaultRifleQuad;
 	static IndexedVertexArray* bulletQuad;
 private:

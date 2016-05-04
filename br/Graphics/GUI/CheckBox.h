@@ -1,15 +1,14 @@
 #pragma once
-#include <glm\glm.hpp>
+#include "../../Graphics/GUI/GUIElement.h"
 
-class CheckBox {
+class CheckBox : public GUIElement {
 public:
-	CheckBox(glm::vec2 position, bool& value);
+	CheckBox(glm::vec2 position, int& value);
 	~CheckBox();
 
 	void update();
-	void setChecked(bool checked) { m_isChecked = checked; }
+	void setCheckedINT(int checked) { b_isChecked = checked; }
 private:
-	glm::vec2 m_position;
-	bool& m_isChecked;
+	int& b_isChecked;
 };
 

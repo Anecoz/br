@@ -81,14 +81,14 @@ void FontRenderer::render() {
 	for (Text* textEntry : textList) {
 		if (!textEntry->getVisibility())
 			continue;
-		const char* text = textEntry->text.c_str();
-		float x = textEntry->x;
-		float y = textEntry->y;
+		const char* text = textEntry->getText().c_str();
+		float x = textEntry->getX();
+		float y = textEntry->getY();
 		vec2 pos{ x, y };
 		MathUtils::GUItoOpenGLCoord(pos);
 		x = pos.x;
 		y = pos.y;
-		setPixelSize(textEntry->size);
+		setPixelSize(textEntry->getSize());
 		for (p = text; *p; p++) {
 			if (FT_Load_Char(face, *p, FT_LOAD_RENDER))
 				continue;

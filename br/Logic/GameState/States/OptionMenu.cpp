@@ -11,10 +11,14 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 
 	Text* Titel = new Text("OPTIONS MENU", 0.4f, 0.1f, 40);
 
-	Text* vsyncLabel = new Text("VSYNC", 0.3f, 0.25f, 20);
-	Text* resolutionLabel = new Text("RESOLUTION", 0.3f, 0.3f, 20);
-	Text* volumeLabel = new Text("VOLUME", 0.3f, 0.35f, 20);
-	slider = new Slider(glm::vec2(0.5f, 0.5f), 0.1f, ConfigUtils::VOLUME);
+	Text* vsyncLabel = new Text("VSYNC", 0.3f, 0.25f, 25);
+	checkbox = new CheckBox(glm::vec2(0.65f, 0.25f), ConfigUtils::VSYNC);
+
+	Text* resolutionLabel = new Text("RESOLUTION", 0.3f, 0.3f, 25);
+
+	Text* volumeLabel = new Text("VOLUME", 0.3f, 0.35f, 25);
+	slider = new Slider(glm::vec2(0.41f, 0.365f), 0.2f, ConfigUtils::VOLUME);
+	volumeValue = new Text(std::to_string((int)(ConfigUtils::VOLUME * 100)), 0.65f, 0.35f, 25);
 
 	Button* applyButton = new Button("APPLY", 30, glm::vec2(0.83f, 0.95f));
 	Button* backButton = new Button("BACK", 30, glm::vec2(0.1f, 0.95f));
@@ -38,6 +42,7 @@ OptionMenu::OptionMenu(StateMachine& machine, GLFWwindow& window, bool replace)
 	m_texts.push_back(vsyncLabel);
 	m_texts.push_back(resolutionLabel);
 	m_texts.push_back(volumeLabel);
+	m_texts.push_back(volumeValue);
 
 	std::cout << "Options Menu Init" << std::endl;
 }
@@ -69,7 +74,10 @@ void OptionMenu::update() {
 		b->update();
 	}
 
-	//slider->update();
+	checkbox->update();
+	slider->update();
+	string volume = std::to_string((int)(ConfigUtils::VOLUME * 100));
+	volumeValue->setText(volume);
 
 	if (b_cleanMe) {
 		cleanUp();
@@ -78,8 +86,10 @@ void OptionMenu::update() {
 }
 
 void OptionMenu::render() {
-	/*if(slider != nullptr)
-		slider->render();*/
+	if(slider != nullptr)
+		slider->render();
+	if (checkbox != nullptr)
+		checkbox->render();
 }
 
 void OptionMenu::cleanUp() {
@@ -94,6 +104,9 @@ void OptionMenu::cleanUp() {
 
 	delete slider;
 	slider = nullptr;
+
+	delete checkbox;
+	checkbox = nullptr;
 
 	m_buttons.clear();
 	m_texts.clear();

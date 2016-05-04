@@ -44,11 +44,11 @@ void Button::update() {
 		f_callback();
 	}
 	else if (isInside) {
-		p_text->size = m_textSize * 1.5f;
+		p_text->setSize(m_textSize * 1.5f);
 	}
 	else {
 		m_pressing = false;
-		p_text->size = m_textSize;
+		p_text->setSize(m_textSize);
 	}
 }
 
