@@ -18,7 +18,7 @@ public:
 	mat4& getRotation() { return rotation; }
 
 	void renderDisplay(mat4& projection);
-	void render(mat4& projection);
+	virtual void render(mat4& projection);
 
 protected:
 	Texture* texture;

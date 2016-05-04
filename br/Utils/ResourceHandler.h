@@ -12,7 +12,13 @@ public:
 	static void init();
 
 	static Texture* playerTexture;
+	static Texture* assaultRifleTexture;
+	static Texture* assaultRifleDisplayTexture;
+	static Texture* bulletTexture;
+
 	static IndexedVertexArray* playerQuad;
+	static IndexedVertexArray* assaultRifleQuad;
+	static IndexedVertexArray* bulletQuad;
 
 private:
 	

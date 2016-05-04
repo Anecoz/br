@@ -8,10 +8,11 @@
 #include <glm/gtx/transform.hpp>
 #include <vector>
 #include <math.h>
+#include <algorithm>
 
 #include <iostream>
 
-using std::vector;
+vector<Ammunition*> Level::ammunitionList;
 
 Level::Level(const string& fileName) {
 	map = new Map();
@@ -46,6 +47,26 @@ Level::~Level() {
 	texAtlas = nullptr;
 	delete mesh;
 	mesh = nullptr;
+}
+
+void Level::update() {
+	updateBullets();
+}
+
+void Level::updateBullets() {
+	auto it = ammunitionList.begin();
+	while (it != ammunitionList.end()) {
+		if ((*it)->dead) {
+			delete (*it);
+			it = ammunitionList.erase(it);
+		}
+		else {
+			(*it)->update(this);
+			++it;
+		}			
+	}
+	/*ammunitionList.erase(remove_if(ammunitionList.begin(), ammunitionList.end(),
+		[](Ammunition* ammo) {return ammo->dead; }), ammunitionList.end());*/
 }
 
 int Level::getWidth() {
@@ -114,21 +135,6 @@ void Level::render(mat4& projMatrix) {
 				continue;
 			GLfloat* texCoords = &(layer->GetTile(x, y).texCoords)[0];
 
-			// Fill the VBOs
-			/*tex1[incrementer] = texCoords[0]; tex2[incrementer] = texCoords[4]; incrementer++;
-			tex1[incrementer] = texCoords[1]; tex2[incrementer] = texCoords[5]; incrementer++;
-			tex1[incrementer] = texCoords[2]; tex2[incrementer] = texCoords[6]; incrementer++;
-			tex1[incrementer] = texCoords[3]; tex2[incrementer] = texCoords[7]; incrementer++;*/
-
-			/*tex1.push_back(texCoords[0]);
-			tex1.push_back(texCoords[1]);
-			tex1.push_back(texCoords[2]);
-			tex1.push_back(texCoords[3]);
-			tex2.push_back(texCoords[4]);
-			tex2.push_back(texCoords[5]);
-			tex2.push_back(texCoords[6]);
-			tex2.push_back(texCoords[7]);*/
-
 			trans.push_back(x);
 			trans.push_back(y);
 
@@ -137,23 +143,17 @@ void Level::render(mat4& projMatrix) {
 			numTiles++;
 		}	
 	}
-	//mesh->modifyTexBuffers(&tex1[0], &tex2[0], tex1.size());
 	mesh->modifyTranslationBuffer(&trans[0], trans.size());
 	mesh->modifyIdBuffer(&ids[0], ids.size());
 	mesh->drawInstances(numTiles);
-	//delete[] tex1;
 	//delete[] tex2;
 
 	texAtlas->unbind();
 	ShadowHandler::unbindShadowMap();
 	ShaderHandler::levelShader->pissOff();
-
 	glActiveTexture(GL_TEXTURE0);
-	/*GLubyte* back = new GLubyte[25*25];
-	ShadowHandler::bindShadowMap();
-	glGetTexImage(GL_TEXTURE_2D, 0, GL_RED, GL_UNSIGNED_BYTE, back);
 
-	cout << "back at 5, 6: " << static_cast<unsigned>(back[6 * 25 + 5]) << endl;
-
-	delete[] back;*/
+	for (Ammunition* ammo : ammunitionList) {
+		ammo->render(projMatrix);
+	}
 }

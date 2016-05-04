@@ -4,7 +4,9 @@
 #include "../Graphics/Shadows/ShadowHandler.h"
 #include "../Graphics/Camera.h"
 #include "../Graphics/Lighting/LightHandler.h"
-#include "../Logic/Player.h"
+#include "Player.h"
+#include "Weapons\Weapon.h"
+#include "Inventory\InventoryItem.h"
 #include <typeinfo>
 
 #include <glm\gtx\transform.hpp>
@@ -15,10 +17,10 @@ DrawableEntity::DrawableEntity(Texture* texture, vec2& initPos, float layer) {
 }
 
 DrawableEntity::~DrawableEntity() {
-	if (typeid(this) != typeid(Player)) {
+	/*if (typeid(this) != typeid(Player)) {
 		delete mesh; mesh = nullptr;
 		delete texture; texture = nullptr;
-	}	
+	}*/
 }
 
 void DrawableEntity::init(float layer, vec2& initPos) {
@@ -28,7 +30,8 @@ void DrawableEntity::init(float layer, vec2& initPos) {
 	this->position = initPos;
 
 	// If not player, otherplayer, weapon or ammunition
-	/*if (typeid(this) != typeid(Player)) {
+	/*if (typeid(this) != typeid(Player) &&
+		typeid(this) != typeid(Weapon)) {
 		this->mesh = GraphicsUtils::createModelQuad(width, height, layer);
 	}*/
 }
@@ -45,7 +48,8 @@ void DrawableEntity::doRender(bool display, mat4& proj) {
 	ShaderHandler::standardShader->comeHere();
 	glActiveTexture(GL_TEXTURE0);
 	if (display) {
-		// TODO
+		InventoryItem* item = (InventoryItem*) this;
+		item->getDisplayTexture()->bind();
 	}
 	else {
 		texture->bind();
@@ -66,7 +70,8 @@ void DrawableEntity::doRender(bool display, mat4& proj) {
 	mesh->draw();
 
 	if (display) {
-		// TODO
+		InventoryItem* item = (InventoryItem*) this;
+		item->getDisplayTexture()->unbind();
 	}
 	else {
 		texture->unbind();
