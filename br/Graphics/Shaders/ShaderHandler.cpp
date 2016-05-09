@@ -7,6 +7,7 @@ Shader* ShaderHandler::fontShader;
 Shader* ShaderHandler::shadowMapShader;
 Shader* ShaderHandler::standardShader;
 Shader* ShaderHandler::guiShader;
+Shader* ShaderHandler::inventoryShader;
 
 void ShaderHandler::init() {
 	levelShader = new Shader("Shaders/level.vert", "Shaders/level.frag");
@@ -14,6 +15,12 @@ void ShaderHandler::init() {
 	shadowMapShader = new Shader("Shaders/shadows/shadowMap.vert", "Shaders/shadows/shadowMap.frag");
 	standardShader = new Shader("Shaders/standard.vert", "Shaders/standard.frag");
 	guiShader = new Shader("Shaders/gui.vert", "Shaders/gui.frag");
+	inventoryShader = new Shader("Shaders/inventory.vert", "Shaders/inventory.frag");
+
+	inventoryShader->comeHere();
+	glActiveTexture(GL_TEXTURE0);
+	inventoryShader->uploadTexture(0, std::string("itemTex"));
+	inventoryShader->pissOff();
 
 	guiShader->comeHere();
 	glActiveTexture(GL_TEXTURE0);
@@ -51,4 +58,5 @@ void ShaderHandler::cleanUp() {
 	delete shadowMapShader; shadowMapShader = nullptr;
 	delete standardShader; standardShader = nullptr;
 	delete guiShader; guiShader = nullptr;
+	delete inventoryShader; inventoryShader = nullptr;
 }

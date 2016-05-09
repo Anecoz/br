@@ -21,6 +21,34 @@ IndexedVertexArray* GraphicsUtils::createModelQuad(float width, float height, fl
 	return new IndexedVertexArray(vertices, texCoords, indices, 4, 6, 4, 3);
 }
 
+IndexedVertexArray* GraphicsUtils::createInventoryQuad() {
+	GLfloat* vertices = new GLfloat[8];
+	vertices[0] = 0.0f;
+	vertices[1] = 0.0f;
+	vertices[2] = 0.0f;
+	vertices[3] = 1.0f;
+	vertices[4] = 1.0f;
+	vertices[5] = 0.0f;
+	vertices[6] = 1.0f;
+	vertices[7] = 1.0f;
+
+	GLfloat* texCoords = new GLfloat[8];
+	texCoords[0] = 0.0f; texCoords[1] = 1.0f;
+	texCoords[2] = 0.0f; texCoords[3] = 0.0f;
+	texCoords[4] = 1.0f; texCoords[5] = 1.0f;
+	texCoords[6] = 1.0f; texCoords[7] = 0.0f;
+
+	GLuint* indices = new GLuint[6];
+	indices[0] = 0;
+	indices[1] = 1;
+	indices[2] = 2;
+	indices[3] = 2;
+	indices[4] = 1;
+	indices[5] = 3;
+
+	return new IndexedVertexArray(vertices, texCoords, indices, 4, 6, 4, 2);
+}
+
 DynamicLevelVao* GraphicsUtils::createLevelQuad() {
 	GLfloat* vertices = new GLfloat[8];
 	vertices[0] = 0.0f;

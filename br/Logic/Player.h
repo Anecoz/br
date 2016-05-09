@@ -4,6 +4,8 @@
 #include "../Utils/ResourceHandler.h"
 #include "Level.h"
 #include "Weapons\AssaultRifle.h"
+#include "Inventory\Inventory.h"
+
 #include <glm\glm.hpp>
 
 using namespace glm;
@@ -35,6 +37,6 @@ private:
 	bool noRunningKeysDown();
 
 	AssaultRifle* rifle;
-
+	Inventory* inventory;
 };
 
