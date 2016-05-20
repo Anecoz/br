@@ -55,7 +55,7 @@ void Inventory::checkInput(Level* level) {
 				}
 				item->setRotation(mat4());
 				item->setPosition(item->getPosition());
-				//level->addDroppedItem(item);
+				level->addDroppedItem(item);
 				remove(item);
 				// Send network notification that we dropped this shit
 				//ClientSender.addItemToWorld(item);
@@ -65,7 +65,7 @@ void Inventory::checkInput(Level* level) {
 
 	// Check the dragging status of the whole window
 	if (!m_isDragging) {
-		if (MouseButtonInput::isMouseLeftDown() &&
+		if (m_isOpen && MouseButtonInput::isMouseLeftDown() &&
 			MathUtils::screenPointWithinInventory(mousePos, m_position, m_baseScale)) {
 			m_offset = MathUtils::screenSpaceToGUI(mousePos) - m_position;
 			m_isDragging = true;

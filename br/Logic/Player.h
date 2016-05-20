@@ -30,13 +30,14 @@ private:
 
 	void updateMovement(Level* level);
 	void updateForward(mat4& proj);
-	bool isDead();
-	void checkRunningStatus();
 
+	bool isDead();
+	void checkPickUp(Level* level);
+
+	void checkRunningStatus();
 	bool anyRunningKeysDown();
 	bool noRunningKeysDown();
 
-	AssaultRifle* rifle;
 	Inventory* inventory;
 };
 

@@ -5,14 +5,15 @@
 #include "../Graphics/Camera.h"
 #include "../Graphics/Shadows/ShadowHandler.h"
 #include "../Graphics/Lighting/LightHandler.h"
+
 #include <glm/gtx/transform.hpp>
 #include <vector>
 #include <math.h>
 #include <algorithm>
-
 #include <iostream>
 
 vector<Ammunition*> Level::ammunitionList;
+unordered_map<int, vector<InventoryItem*>> Level::droppedItems;
 
 Level::Level(const string& fileName) {
 	map = new Map();
@@ -67,6 +68,92 @@ void Level::updateBullets() {
 	}
 	/*ammunitionList.erase(remove_if(ammunitionList.begin(), ammunitionList.end(),
 		[](Ammunition* ammo) {return ammo->dead; }), ammunitionList.end());*/
+}
+
+int Level::hashPositionToTileIndex(vec2 position) {
+	// Only works with 1:1 maps
+	float x = roundEven(position.x);
+	float y = roundEven(position.y);
+	return y * map->GetWidth() + x;
+}
+
+void Level::addDroppedItem(InventoryItem* item) {
+	// Will create a key entry if it does not exist
+	int tileIndex = hashPositionToTileIndex(item->getPosition());
+	droppedItems[tileIndex].push_back(item);
+}
+
+void Level::removeItemById(vec2 position, int uniqueId) {
+	InventoryItem* toRemove = nullptr;
+	// Make sure we have the keyword
+	int tileIndex = hashPositionToTileIndex(position);
+	auto list = droppedItems.find(tileIndex);
+	assert(list != droppedItems.end());
+
+	for (auto item : list->second) {
+		if (item->getUniqueId() == uniqueId) {
+			toRemove = item;
+			break;
+		}
+	}
+	if (toRemove != nullptr) {
+		list->second.erase(remove(list->second.begin(), list->second.end(), toRemove), list->second.end());
+		if (list->second.size() == 0)
+			droppedItems.erase(tileIndex);
+	}
+
+}
+
+InventoryItem* Level::getDroppedItemById(vec2 position, int uniqueId) {
+	InventoryItem* out = nullptr;
+	// Make sure we have the keyword
+	int tileIndex = hashPositionToTileIndex(position);
+	auto list = droppedItems.find(tileIndex);
+	assert(list != droppedItems.end());
+
+	// Don't forget to remove from the list
+	for (auto item : list->second) {
+		if (item->getUniqueId() == uniqueId) {
+			out = item;
+			break;
+		}
+	}
+	list->second.erase(remove(list->second.begin(), list->second.end(), out), list->second.end());
+	if (list->second.size() == 0)
+		droppedItems.erase(tileIndex);
+
+	if (out != nullptr)
+		return out;
+	else
+		return nullptr;
+}
+
+InventoryItem* Level::getClosestItemAt(vec2 playerPosition) {
+	// Loop 9 closest **NOT WORKING ATM**
+	InventoryItem* item = nullptr;
+	float minDistance = 10000.0f;
+	// Make sure we have the keyword
+	int tileIndex = hashPositionToTileIndex(playerPosition);
+	auto list = droppedItems.find(tileIndex);
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
+			if (list != droppedItems.end()) {
+				for (auto currItem : list->second) {
+					if (distance(playerPosition, currItem->getPosition()) < minDistance) {
+						item = currItem;
+						minDistance = distance(playerPosition, currItem->getPosition());
+					}
+				}
+			}
+		}
+	}
+
+	if (item != nullptr) {
+		list->second.erase(remove(list->second.begin(), list->second.end(), item), list->second.end());
+		return item;
+	}
+	else
+		return nullptr;
 }
 
 int Level::getWidth() {
@@ -156,4 +243,8 @@ void Level::render(mat4& projMatrix) {
 	for (Ammunition* ammo : ammunitionList) {
 		ammo->render(projMatrix);
 	}
+
+	for (auto list : droppedItems)
+		for (auto item : list.second)
+			item->render(projMatrix);
 }

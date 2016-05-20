@@ -10,10 +10,10 @@ const float Player::SPEED = 0.06f;
 
 Player::Player() : DrawableEntity(ResourceHandler::playerTexture, vec2(10), -0.3f) {
 	this->mesh = ResourceHandler::playerQuad;
-	rifle = new AssaultRifle(position, -0.2f, AssaultRifle::MAG_SIZE, 40, 800, 10);
 	inventory = new Inventory();
-	inventory->add(rifle);
-	inventory->setEquipedWeapon(rifle);
+	inventory->add(new AssaultRifle(position, -0.2f, AssaultRifle::MAG_SIZE, 40, 800, 10));
+	inventory->add(new AssaultRifle(position, -0.2f, AssaultRifle::MAG_SIZE, 40, 800, 10));
+	inventory->add(new AssaultRifle(position, -0.2f, AssaultRifle::MAG_SIZE, 40, 800, 10));
 }
 
 Player::~Player() {
@@ -24,13 +24,15 @@ void Player::update(Level* level, mat4& proj) {
 	updateMovement(level);
 	checkRunningStatus();
 	inventory->update(level);
+	checkPickUp(level);
 
 	if (!inventory->isDragging() && inventory->getEquipedWeapon() != nullptr) {
-		rifle->checkFire();
+		inventory->getEquipedWeapon()->checkFire();
 	}
 
 	updateForward(proj);
-	rifle->update(this->forward, this->position, this->rotation);
+	if (inventory->getEquipedWeapon() != nullptr)
+		inventory->getEquipedWeapon()->update(this->forward, this->position, this->rotation);
 }
 
 void Player::updateMovement(Level* level) {
@@ -59,12 +61,23 @@ void Player::updateMovement(Level* level) {
 
 void Player::render(mat4& proj) {
 	DrawableEntity::render(proj);
-	rifle->render(proj);
 	inventory->render(proj);
 }
 
 bool Player::isDead() {
 	return health <= 0;
+}
+
+void Player::checkPickUp(Level* level) {
+	// Check whether we're picking something up
+	if (KeyInput::isKeyClicked(GLFW_KEY_F)) {
+		InventoryItem* item = level->getClosestItemAt(position);
+		if (item != nullptr) {
+			inventory->add(item);
+			item->setPosition(position);
+			//ClientSender.sendPickupRequest(item);
+		}
+	}
 }
 
 void Player::checkRunningStatus() {
