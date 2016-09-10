@@ -5,6 +5,7 @@
 #include "../Graphics/Camera.h"
 #include "../Graphics/Shadows/ShadowHandler.h"
 #include "../Graphics/Lighting/LightHandler.h"
+#include "Weapons/Weapon.h"
 
 #include <glm/gtx/transform.hpp>
 #include <vector>
@@ -244,7 +245,11 @@ void Level::render(mat4& projMatrix) {
 		ammo->render(projMatrix);
 	}
 
-	for (auto list : droppedItems)
-		for (auto item : list.second)
-			item->render(projMatrix);
+	for (auto& list : droppedItems)
+		for (auto& item : list.second) {
+			if (Weapon* weapon = dynamic_cast<Weapon*>(item))
+				weapon->renderDisplay(projMatrix);
+			else
+				item->render(projMatrix);
+		}			
 }

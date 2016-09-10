@@ -54,7 +54,7 @@ void Inventory::checkInput(Level* level) {
 					m_equipedWeapon = nullptr;
 				}
 				item->setRotation(mat4());
-				item->setPosition(item->getPosition());
+				item->setPosition(item->getPosition());	//< seems weird, and is probably why items and up wrong
 				level->addDroppedItem(item);
 				remove(item);
 				// Send network notification that we dropped this shit
