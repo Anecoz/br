@@ -25,11 +25,13 @@ void MathUtils::screenSpaceToWorld(glm::vec2& screenPoint, int screenWidth, int 
 	screenPoint.x = temp.x;
 	screenPoint.y = temp.y;
 }
-glm::vec2 MathUtils::screenSpaceToGUI(glm::vec2& screenPoint) {
+
+glm::vec2 MathUtils::screenSpaceToGUI(const glm::vec2& screenPoint) {
 	float x = screenPoint.x / (float)1280;  // TODO: GET SCREEN SIZE FROM OPTIONS FILE
 	float y = screenPoint.y / (float)720;
 	return glm::vec2(x, y);
 }
+
 bool MathUtils::isWithinGUIBox(glm::vec2& guiPoint, float x, float y, float width, float height) {
 	bool out = false;
 	if (guiPoint.x >= x && guiPoint.x <= x + width) {
@@ -38,6 +40,7 @@ bool MathUtils::isWithinGUIBox(glm::vec2& guiPoint, float x, float y, float widt
 	}
 	return out;
 }
+
 bool MathUtils::screenPointWithinInventory(glm::vec2& screenPoint, glm::vec2& inventoryPosition, float& baseScale) {
 	glm::vec2 mouseGUI = screenSpaceToGUI(screenPoint);
 	// Get inventory dimensions in GUI coordinates
@@ -63,7 +66,7 @@ int MathUtils::getInventoryItemIndex(glm::vec2& mousePosition, glm::vec2& positi
 	return indX + itemPerRow*indY;
 }
 
-float MathUtils::angle(glm::vec2& v1, glm::vec2& v2) {
+float MathUtils::angle(const glm::vec2& v1, const glm::vec2& v2) {
 	float dot = v1.x * v2.x + v1.y * v2.y;
 	float det = v1.x * v2.y - v1.y * v2.x;
 	return atan2f(det, dot);

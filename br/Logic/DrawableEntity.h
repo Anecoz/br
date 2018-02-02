@@ -9,7 +9,7 @@ using namespace glm;
 class DrawableEntity
 {
 public:
-	DrawableEntity(Texture* texture, vec2& initPos, float layer);
+	DrawableEntity(Texture* texture, const vec2& initPos, float layer);
 	~DrawableEntity();
 
 	float getWidth() { return width; }
@@ -32,6 +32,6 @@ protected:
 	void doRender(bool display, mat4& projection);
 
 private:
-	void init(float layer, vec2& initPos);
+	void init(float layer, const vec2& initPos);
 };
 

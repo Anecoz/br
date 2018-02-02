@@ -17,7 +17,7 @@ public:
 	Texture* getTexture() { return this->texture; }
 	Texture* getDisplayTexture() { return this->displayTexture; }
 	IndexedVertexArray* getMesh() { return this->mesh; }
-	void setRotation(mat4& rotation) { this->rotation = rotation; }
+	void setRotation(const mat4& rotation) { this->rotation = rotation; }
 
 protected:
 	int uniqueId;

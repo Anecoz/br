@@ -18,7 +18,7 @@ void AudioMaster::init() {
 	alGetError(); // clear error code 
 }
 
-void AudioMaster::setListenerData(glm::vec2& position, glm::vec2& velocity) {
+void AudioMaster::setListenerData(const glm::vec2& position, const glm::vec2& velocity) {
 	alListener3f(AL_POSITION, position.x, position.y, 0);
 	alListener3f(AL_VELOCITY, velocity.x, velocity.y, 0);
 }

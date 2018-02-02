@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\br\Audio\AudioMaster.cpp" />
+    <ClCompile Include="..\br\Audio\AudioSource.cpp" />
+    <ClCompile Include="..\br\Font\FontRenderer.cpp" />
+    <ClCompile Include="..\br\Font\Text.cpp" />
+    <ClCompile Include="..\br\Graphics\Camera.cpp" />
+    <ClCompile Include="..\br\Graphics\GUI\Button.cpp" />
+    <ClCompile Include="..\br\Graphics\GUI\CheckBox.cpp" />
+    <ClCompile Include="..\br\Graphics\GUI\GUIElement.cpp" />
+    <ClCompile Include="..\br\Graphics\GUI\Slider.cpp" />
+    <ClCompile Include="..\br\Graphics\Lighting\LightHandler.cpp" />
+    <ClCompile Include="..\br\Graphics\Lowlevel\DynamicLevelVao.cpp" />
+    <ClCompile Include="..\br\Graphics\Lowlevel\Fbo.cpp" />
+    <ClCompile Include="..\br\Graphics\Lowlevel\IndexedVertexArray.cpp" />
+    <ClCompile Include="..\br\Graphics\Lowlevel\Texture.cpp" />
+    <ClCompile Include="..\br\Graphics\Lowlevel\VertexArray.cpp" />
+    <ClCompile Include="..\br\Graphics\Shaders\Shader.cpp" />
+    <ClCompile Include="..\br\Graphics\Shaders\ShaderHandler.cpp" />
+    <ClCompile Include="..\br\Graphics\Shadows\ShadowCasterTexture.cpp" />
+    <ClCompile Include="..\br\Graphics\Shadows\ShadowHandler.cpp" />
+    <ClCompile Include="..\br\Graphics\Shadows\ShadowMap.cpp" />
+    <ClCompile Include="..\br\Input\KeyInput.cpp" />
+    <ClCompile Include="..\br\Input\MouseButtonInput.cpp" />
+    <ClCompile Include="..\br\Input\MousePosInput.cpp" />
+    <ClCompile Include="..\br\LodePng\lodepng.cpp" />
+    <ClCompile Include="..\br\Logic\Collision\CollisionBox.cpp" />
+    <ClCompile Include="..\br\Logic\Collision\CollisionHandler.cpp" />
+    <ClCompile Include="..\br\Logic\DrawableEntity.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\Application.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\State.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\StateMachine.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\States\GameState.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\States\MainMenu.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\States\OptionMenu.cpp" />
+    <ClCompile Include="..\br\Logic\GameState\States\OverState.cpp" />
+    <ClCompile Include="..\br\Logic\Inventory\Inventory.cpp" />
+    <ClCompile Include="..\br\Logic\Inventory\InventoryItem.cpp" />
+    <ClCompile Include="..\br\Logic\Level.cpp" />
+    <ClCompile Include="..\br\Logic\Player.cpp" />
+    <ClCompile Include="..\br\Logic\Weapons\Ammunition.cpp" />
+    <ClCompile Include="..\br\Logic\Weapons\AssaultRifle.cpp" />
+    <ClCompile Include="..\br\Logic\Weapons\Bullet.cpp" />
+    <ClCompile Include="..\br\Logic\Weapons\Weapon.cpp" />
+    <ClCompile Include="..\br\main.cpp" />
+    <ClCompile Include="..\br\Tmx\base64\base64.cpp" />
+    <ClCompile Include="..\br\Tmx\miniz.c" />
+    <ClCompile Include="..\br\Tmx\tinyxml\tinyxml2.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxEllipse.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxImage.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxImageLayer.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxLayer.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxMap.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxObject.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxObjectGroup.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxPolygon.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxPolyline.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxPropertySet.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTerrain.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTerrainArray.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTile.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTileLayer.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTileOffset.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxTileset.cpp" />
+    <ClCompile Include="..\br\Tmx\TmxUtil.cpp" />
+    <ClCompile Include="..\br\Tmx\zlib\adler32.c" />
+    <ClCompile Include="..\br\Tmx\zlib\compress.c" />
+    <ClCompile Include="..\br\Tmx\zlib\crc32.c" />
+    <ClCompile Include="..\br\Tmx\zlib\deflate.c" />
+    <ClCompile Include="..\br\Tmx\zlib\gzio.c" />
+    <ClCompile Include="..\br\Tmx\zlib\infback.c" />
+    <ClCompile Include="..\br\Tmx\zlib\inffast.c" />
+    <ClCompile Include="..\br\Tmx\zlib\inflate.c" />
+    <ClCompile Include="..\br\Tmx\zlib\inftrees.c" />
+    <ClCompile Include="..\br\Tmx\zlib\trees.c" />
+    <ClCompile Include="..\br\Tmx\zlib\uncompr.c" />
+    <ClCompile Include="..\br\Tmx\zlib\zlib-dllversion.c" />
+    <ClCompile Include="..\br\Tmx\zlib\zutil.c" />
+    <ClCompile Include="..\br\Utils\ConfigUtils.cpp" />
+    <ClCompile Include="..\br\Utils\GraphicsUtils.cpp" />
+    <ClCompile Include="..\br\Utils\LevelUtils.cpp" />
+    <ClCompile Include="..\br\Utils\MathUtils.cpp" />
+    <ClCompile Include="..\br\Utils\ResourceHandler.cpp" />
+    <ClCompile Include="..\br\Utils\ShaderUtils.cpp" />
+    <ClCompile Include="..\br\Utils\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\br\Audio\AudioMaster.h" />
+    <ClInclude Include="..\br\Audio\AudioSource.h" />
+    <ClInclude Include="..\br\Font\FontRenderer.h" />
+    <ClInclude Include="..\br\Font\Text.h" />
+    <ClInclude Include="..\br\Graphics\Camera.h" />
+    <ClInclude Include="..\br\Graphics\GUI\Button.h" />
+    <ClInclude Include="..\br\Graphics\GUI\CheckBox.h" />
+    <ClInclude Include="..\br\Graphics\GUI\GUIElement.h" />
+    <ClInclude Include="..\br\Graphics\GUI\Slider.h" />
+    <ClInclude Include="..\br\Graphics\Lighting\LightHandler.h" />
+    <ClInclude Include="..\br\Graphics\Lowlevel\DynamicLevelVao.h" />
+    <ClInclude Include="..\br\Graphics\Lowlevel\Fbo.h" />
+    <ClInclude Include="..\br\Graphics\Lowlevel\IndexedVertexArray.h" />
+    <ClInclude Include="..\br\Graphics\Lowlevel\Texture.h" />
+    <ClInclude Include="..\br\Graphics\Lowlevel\VertexArray.h" />
+    <ClInclude Include="..\br\Graphics\Shaders\Shader.h" />
+    <ClInclude Include="..\br\Graphics\Shaders\ShaderHandler.h" />
+    <ClInclude Include="..\br\Graphics\Shadows\ShadowCasterTexture.h" />
+    <ClInclude Include="..\br\Graphics\Shadows\ShadowHandler.h" />
+    <ClInclude Include="..\br\Graphics\Shadows\ShadowMap.h" />
+    <ClInclude Include="..\br\Input\KeyInput.h" />
+    <ClInclude Include="..\br\Input\MouseButtonInput.h" />
+    <ClInclude Include="..\br\Input\MousePosInput.h" />
+    <ClInclude Include="..\br\LodePng\lodepng.h" />
+    <ClInclude Include="..\br\Logic\Collision\CollisionBox.h" />
+    <ClInclude Include="..\br\Logic\Collision\CollisionHandler.h" />
+    <ClInclude Include="..\br\Logic\DrawableEntity.h" />
+    <ClInclude Include="..\br\Logic\GameState\Application.h" />
+    <ClInclude Include="..\br\Logic\GameState\State.h" />
+    <ClInclude Include="..\br\Logic\GameState\StateMachine.h" />
+    <ClInclude Include="..\br\Logic\GameState\States\GameState.h" />
+    <ClInclude Include="..\br\Logic\GameState\States\MainMenu.h" />
+    <ClInclude Include="..\br\Logic\GameState\States\OptionMenu.h" />
+    <ClInclude Include="..\br\Logic\GameState\States\OverState.h" />
+    <ClInclude Include="..\br\Logic\Inventory\Inventory.h" />
+    <ClInclude Include="..\br\Logic\Inventory\InventoryItem.h" />
+    <ClInclude Include="..\br\Logic\Level.h" />
+    <ClInclude Include="..\br\Logic\Player.h" />
+    <ClInclude Include="..\br\Logic\Weapons\Ammunition.h" />
+    <ClInclude Include="..\br\Logic\Weapons\AssaultRifle.h" />
+    <ClInclude Include="..\br\Logic\Weapons\Bullet.h" />
+    <ClInclude Include="..\br\Logic\Weapons\Weapon.h" />
+    <ClInclude Include="..\br\Tmx\base64\base64.h" />
+    <ClInclude Include="..\br\Tmx\tinyxml\tinyxml2.h" />
+    <ClInclude Include="..\br\Tmx\Tmx.h" />
+    <ClInclude Include="..\br\Tmx\TmxEllipse.h" />
+    <ClInclude Include="..\br\Tmx\TmxImage.h" />
+    <ClInclude Include="..\br\Tmx\TmxImageLayer.h" />
+    <ClInclude Include="..\br\Tmx\TmxLayer.h" />
+    <ClInclude Include="..\br\Tmx\TmxMap.h" />
+    <ClInclude Include="..\br\Tmx\TmxMapTile.h" />
+    <ClInclude Include="..\br\Tmx\TmxObject.h" />
+    <ClInclude Include="..\br\Tmx\TmxObjectGroup.h" />
+    <ClInclude Include="..\br\Tmx\TmxPoint.h" />
+    <ClInclude Include="..\br\Tmx\TmxPolygon.h" />
+    <ClInclude Include="..\br\Tmx\TmxPolyline.h" />
+    <ClInclude Include="..\br\Tmx\TmxPropertySet.h" />
+    <ClInclude Include="..\br\Tmx\TmxTerrain.h" />
+    <ClInclude Include="..\br\Tmx\TmxTerrainArray.h" />
+    <ClInclude Include="..\br\Tmx\TmxTile.h" />
+    <ClInclude Include="..\br\Tmx\TmxTileLayer.h" />
+    <ClInclude Include="..\br\Tmx\TmxTileOffset.h" />
+    <ClInclude Include="..\br\Tmx\TmxTileset.h" />
+    <ClInclude Include="..\br\Tmx\TmxUtil.h" />
+    <ClInclude Include="..\br\Tmx\zlib\crc32.h" />
+    <ClInclude Include="..\br\Tmx\zlib\deflate.h" />
+    <ClInclude Include="..\br\Tmx\zlib\inffast.h" />
+    <ClInclude Include="..\br\Tmx\zlib\inffixed.h" />
+    <ClInclude Include="..\br\Tmx\zlib\inflate.h" />
+    <ClInclude Include="..\br\Tmx\zlib\inftrees.h" />
+    <ClInclude Include="..\br\Tmx\zlib\trees.h" />
+    <ClInclude Include="..\br\Tmx\zlib\zconf.h" />
+    <ClInclude Include="..\br\Tmx\zlib\zconf.in.h" />
+    <ClInclude Include="..\br\Tmx\zlib\zlib.h" />
+    <ClInclude Include="..\br\Tmx\zlib\zutil.h" />
+    <ClInclude Include="..\br\Utils\ConfigUtils.h" />
+    <ClInclude Include="..\br\Utils\GraphicsUtils.h" />
+    <ClInclude Include="..\br\Utils\LevelUtils.h" />
+    <ClInclude Include="..\br\Utils\MathUtils.h" />
+    <ClInclude Include="..\br\Utils\ResourceHandler.h" />
+    <ClInclude Include="..\br\Utils\ShaderUtils.h" />
+    <ClInclude Include="..\br\Utils\Timer.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A92FBA2C-0BAC-49CA-B0EA-1ED37FA1B585}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BRNEW</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <AdditionalIncludeDirectories>C:\Users\heilm\source\repos\br\BR_NEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\heilm\source\repos\br\BR_NEW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype271.lib;SimpleIni.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <AdditionalIncludeDirectories>C:\Users\heilm\source\repos\br\BR_NEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\heilm\source\repos\br\BR_NEW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype271.lib;SimpleIni.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <AdditionalIncludeDirectories>C:\Users\heilm\source\repos\br\BR_NEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\heilm\source\repos\br\BR_NEW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype271.lib;SimpleIni.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <AdditionalIncludeDirectories>C:\Users\heilm\source\repos\br\BR_NEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\heilm\source\repos\br\BR_NEW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;freetype271.lib;SimpleIni.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

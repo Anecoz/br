@@ -8,7 +8,7 @@ CollisionBox::CollisionBox() {
 	vel = vec2(0);
 }
 
-CollisionBox::CollisionBox(float x, float y, float w, float h, vec2& vel) {
+CollisionBox::CollisionBox(float x, float y, float w, float h, const vec2& vel) {
 	this->x = x;
 	this->y = y;
 	this->w = w;

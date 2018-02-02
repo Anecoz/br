@@ -13,7 +13,7 @@
 #include <typeinfo>
 #include <glm\gtx\transform.hpp>
 
-DrawableEntity::DrawableEntity(Texture* texture, vec2& initPos, float layer) {
+DrawableEntity::DrawableEntity(Texture* texture, const vec2& initPos, float layer) {
 	this->texture = texture;
 	init(layer, initPos);
 }
@@ -27,7 +27,7 @@ DrawableEntity::~DrawableEntity() {
 	}	*/
 }
 
-void DrawableEntity::init(float layer, vec2& initPos) {
+void DrawableEntity::init(float layer, const vec2& initPos) {
 	this->width = texture->getWidthAfterScale();
 	this->height = texture->getHeightAfterScale();
 	this->scale = texture->getScale();

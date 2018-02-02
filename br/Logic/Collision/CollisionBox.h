@@ -8,7 +8,7 @@ class CollisionBox
 {
 public:
 	CollisionBox();
-	CollisionBox(float x, float y, float w, float h, vec2& vel);
+	CollisionBox(float x, float y, float w, float h, const vec2& vel);
 	~CollisionBox() = default;
 
 	float x;

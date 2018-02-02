@@ -45,7 +45,7 @@ public:
 	~AudioMaster();
 
 	static void init();
-	static void setListenerData(glm::vec2& position, glm::vec2& velocity);
+	static void setListenerData(const glm::vec2& position, const glm::vec2& velocity);
 	static int loadSound(string file);
 
 private:
